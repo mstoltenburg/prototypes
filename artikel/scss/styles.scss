@@ -1,0 +1,176 @@
+// variables
+$background-color: #f8f8f8;
+
+// include custom mixins
+@import "mixins";
+
+/* Basic Styles */
+
+*,
+*:before,
+*:after {
+	@include box-sizing();
+}
+
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 100%;
+	line-height: 1.4;
+}
+
+body {
+	color: #333;
+	background-color: #fff;
+	margin: 0;
+	padding: 1em;
+}
+
+article {
+	margin: 0 auto;
+	max-width: 992px;
+}
+
+h1 {
+	font-size: 2em;
+	line-height: 1.2;
+	margin: 0 0 0.625em 0;
+
+	.kicker {
+		display: block;
+		font-size: 1rem;
+		font-weight: normal;
+		text-transform: uppercase;
+		margin: 0 0 0.5rem 0;
+	}
+}
+
+
+figure {
+	margin: 0 0 1em 0;
+
+	img {
+		width: 100%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+figcaption {
+	color: #666;
+	background-color: $background-color;
+	padding: 0.75em 1em;
+	font-size: 0.875em;
+
+	p {
+		margin: 0 0 0.25rem 0;
+	}
+	time {
+		font-weight: bold;
+	}
+	.source {
+		float: right;
+	}
+}
+
+a {
+	color: #369;
+	text-decoration: none;
+
+	&:hover {
+		color: #036;
+		text-decoration: underline;
+	}
+
+	&.icon {
+		display: inline-block;
+		text-indent: -25px;
+		padding-left: 25px;
+	}
+
+	&.icon:before {
+		content: "";
+		display: inline-block;
+		vertical-align: bottom;
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		background-image: url("../images/icons.png");
+	}
+
+	&.icon-a:before {
+		background-position: -180px 0;
+	}
+	&.icon-b:before {
+		background-position: -220px -120px;
+	}
+	&.icon-c:before {
+		background-position: -80px -40px;
+	}
+}
+
+p {
+	margin: 0 0 1em 0;
+}
+
+.teaser {
+	overflow-x: hidden; // avoid scrollbars from teasers negative margin
+
+	.wrapper {
+		display: table;
+		border-collapse: separate;
+		border-spacing: 1em 0;
+		width: calc(100% + 2em);
+		margin: 0 -1em 1em;
+	}
+
+	aside {
+		display: table-cell;
+		width: 33.33%;
+		border: 1px solid #ccc;
+		background-color: $background-color;
+		padding: 1em;
+		vertical-align: top;
+	}
+
+	h3 {
+		font-size: 1em;
+		font-weight: normal;
+		margin: 0;
+	}
+}
+
+// styles for iphone 5 landscape and smaller
+@media only screen and (max-width: 568px) {
+	h1 {
+		font-size: 1.5em;
+	}
+}
+
+// styles for iphone 4 landscape and smaller
+@media only screen and (max-width: 480px) {
+	html {
+		font-size: 14px;
+	}
+
+	.teaser {
+		.wrapper {
+			display: block;
+			width: auto;
+			margin: 0;
+		}
+
+		aside {
+			display: block;
+			width: 100%;
+			margin-bottom: 1em;
+		}
+	}
+
+	figcaption {
+		background-color: transparent;
+		padding: 0.5em 0 0 0;
+	}
+}
+
+/* Development Styles */
+@import "development";

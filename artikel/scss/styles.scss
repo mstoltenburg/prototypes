@@ -28,6 +28,9 @@ body {
 article {
 	margin: 0 auto;
 	max-width: 992px;
+	// avoid scrollbars from teasers negative margin
+	// only needed if margin tops viewport (body padding in our case)
+	// overflow-x: hidden;
 }
 
 h1 {
@@ -113,14 +116,13 @@ p {
 }
 
 .teaser {
-	overflow-x: hidden; // avoid scrollbars from teasers negative margin
+	margin: 0 -1em 1em;
 
 	.wrapper {
 		display: table;
 		border-collapse: separate;
 		border-spacing: 1em 0;
-		width: calc(100% + 2em);
-		margin: 0 -1em 1em;
+		width: 100%;
 	}
 
 	aside {
@@ -153,10 +155,11 @@ p {
 	}
 
 	.teaser {
+		margin: 0;
+
 		.wrapper {
 			display: block;
 			width: auto;
-			margin: 0;
 		}
 
 		aside {

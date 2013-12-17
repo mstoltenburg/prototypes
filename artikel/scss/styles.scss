@@ -157,6 +157,11 @@ aside {
 		font-size: 14px;
 	}
 
+	figcaption {
+		background-color: transparent;
+		padding: 0.5em 0 0 0;
+	}
+
 	.teaser {
 		margin: 0;
 
@@ -170,11 +175,6 @@ aside {
 			width: 100%;
 			margin-bottom: 1em;
 		}
-	}
-
-	figcaption {
-		background-color: transparent;
-		padding: 0.5em 0 0 0;
 	}
 }
 

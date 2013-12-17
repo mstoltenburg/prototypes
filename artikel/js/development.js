@@ -24,8 +24,8 @@
 					break;
 
 				case 'y':
-					iframe.height = '100%';
-					// iframe.style.height = '100%';
+					// iframe.height = '100%';
+					iframe.style.height = '100%';
 					break;
 			}
 		}

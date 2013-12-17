@@ -115,6 +115,18 @@ p {
 	margin: 0 0 1em 0;
 }
 
+aside {
+	border: 1px solid #ccc;
+	background-color: $background-color;
+	padding: 1em;
+
+	h3 {
+		font-size: 1em;
+		font-weight: normal;
+		margin: 0;
+	}
+}
+
 .teaser {
 	margin: 0 -1em 1em;
 
@@ -128,16 +140,7 @@ p {
 	aside {
 		display: table-cell;
 		width: 33.33%;
-		border: 1px solid #ccc;
-		background-color: $background-color;
-		padding: 1em;
 		vertical-align: top;
-	}
-
-	h3 {
-		font-size: 1em;
-		font-weight: normal;
-		margin: 0;
 	}
 }
 
@@ -172,5 +175,38 @@ p {
 	figcaption {
 		background-color: transparent;
 		padding: 0.5em 0 0 0;
+	}
+}
+
+/**
+ * Alternative flexbox code
+ */
+
+.flex {
+	display: -webkit-flex;
+	display:         flex;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+
+	aside {
+		margin: 0 0 1em 1em;
+		-webkit-flex: 1;
+		        flex: 1;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
+
+// styles for iphone 4 landscape and smaller
+@media only screen and (max-width: 480px) {
+	.flex {
+		-webkit-flex-direction: column;
+		        flex-direction: column;
+
+		aside {
+			margin-left: 0;
+		}
 	}
 }

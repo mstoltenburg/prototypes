@@ -20,7 +20,7 @@
 		} else if (change) {
 			switch (change) {
 				case 'x':
-					top.location.href = iframe.src;
+					top.location.href = window.frame.location.href;
 					break;
 
 				case 'y':

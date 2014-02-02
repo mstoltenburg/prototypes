@@ -34,7 +34,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					"build/js/zeit.min.js": [ "src/js/zeit.js" ]
+					"build/js/zeit.min.js": [ "src/js/text-search.js", "src/js/zeit.js" ]
 				},
 				options: {
 					preserveComments: false,
@@ -43,7 +43,7 @@ module.exports = function( grunt ) {
 			}
 		},
 		qunit: {
-			files: [ "test/**/*.html" ]
+			all: [ "test/**/*.html" ]
 		},
 		copy: {
 			css: {
@@ -81,6 +81,10 @@ module.exports = function( grunt ) {
 			styles: {
 				files: [ "src/sass/*.scss" ],
 				tasks: "sass"
+			},
+			tests: {
+				files: [ "test/*.html", "test/*.js" ],
+				tasks: "qunit"
 			}
 		}
 	});

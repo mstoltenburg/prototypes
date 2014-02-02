@@ -15,7 +15,7 @@
 
 		<p>Gegeben sei ein Textabsatz. Schreiben Sie ein Programm, das den ersten kürzesten Textabschnitt anzeigt, welcher alle gegebenen k Wörter enthält. Ein Abschnitt ist kürzer, wenn er eine kleinere Anzahl Wörter enthält. Berücksichtigen Sie nur Buchstaben aus den Mustergruppen [A-Z] und [a-z]. Groß- und Kleinschreibung sollen bei Vergleichen nicht berücksichtigt werden. Wird kein Abschnitt gefunden, soll "KEIN ABSCHNITT GEFUNDEN" ausgegeben werden.</p>
 
-		<form action="">
+		<form name="searchForm" action="">
 			<fieldset>
 				<label for="searchText">Eingabe</label>
 				<textarea name="searchText" id="searchText">
@@ -37,6 +37,7 @@ Wörter
 				</textarea>
 				<input type="submit" value="search text">
 			</fieldset>
+			<div id="searchResult"></div>
 		</form>
 	</main>
 

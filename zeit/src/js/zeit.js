@@ -56,18 +56,22 @@
 
 		searchText: function() {
 			var firstWord = this.query[0],
-				separator = "\\b[^]+?\\b",
-				re = new RegExp("\\b" + this.query.join(separator) + "\\b", "gi"),
-				matches = this.text.match(re);
+				startSearch = new RegExp("\\b" + firstWord + "\\b", "gi"),
+				re = new RegExp("\\b" + this.query.join("\\b[^]+?\\b") + "\\b", "gi"),
+				source,
+				hit;
 
-			if (matches) {
-				console.log(re.toString());
-				console.log(matches);
-				console.log(firstWord);
+			// find all occurrences of the first word to get nested constructs
+			while ((source = startSearch.exec(this.text)) !== null) {
+				// start searching the text at index of current match
+				re.lastIndex = source.index;
+				hit = re.exec(this.text);
 
-				this.result = matches[0];
-			} else {
-				this.errors.push("Kein Abschnitt gefunden.");
+				if (hit !== null) {
+					if (!this.result || this.countWords(hit[0]) < this.countWords(this.result)) {
+						this.result = hit[0];
+					}
+				}
 			}
 		}
 	};

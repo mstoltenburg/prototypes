@@ -6,7 +6,8 @@ module.exports = function( grunt ) {
 		jshint: {
 			all: {
 				src: [
-					"src/**/*.js", "test/**/*.js"
+					"src/**/*.js"
+					// , "test/**/*.js"
 				],
 				options: {
 					"curly": true,
@@ -25,8 +26,8 @@ module.exports = function( grunt ) {
 					"browser": true,
 					"devel": true,
 					"globals": {
-						"jQuery": true,
-						"TextSearch": true
+						"TextSearch": true,
+						"Matrices": true
 					}
 				}
 			}
@@ -34,10 +35,11 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					"build/js/zeit.min.js": [ "src/js/text-search.js", "src/js/zeit.js" ]
+					"build/js/zeit.min.js": [ "src/js/text-search.js", "src/js/matrix.js", "src/js/zeit.js" ]
 				},
 				options: {
 					preserveComments: false,
+					beautify: true,
 					report: "min"
 				}
 			}
@@ -70,6 +72,9 @@ module.exports = function( grunt ) {
 			}
 		},
 		watch: {
+			options: {
+				livereload: true,
+			},
 			html: {
 				files: [ "src/*.html" ],
 				tasks: "copy:html"
@@ -85,6 +90,10 @@ module.exports = function( grunt ) {
 			tests: {
 				files: [ "test/*.html", "test/*.js" ],
 				tasks: "qunit"
+			},
+			config: {
+				files: [ "Gruntfile.js" ],
+				tasks: "default"
 			}
 		}
 	});
@@ -99,5 +108,5 @@ module.exports = function( grunt ) {
 
 	// Default grunt
 	grunt.registerTask( "scripts", [ "jshint", "uglify"] );
-	grunt.registerTask( "default", [ "jshint", "uglify", "sass", "copy"] );
+	grunt.registerTask( "default", [ "jshint", "uglify", "qunit", "sass", "copy"] );
 };

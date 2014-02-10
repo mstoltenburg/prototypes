@@ -1,10 +1,11 @@
-(function(TextSearch) {
+(function() {
+	"use strict";
 
 	function searchText(e) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		var ts = new TextSearch(this.elements.searchText.value),
+		var ts = new TextSearch(e.currentTarget.elements.searchText.value),
 			el = document.getElementById("searchResult"),
 			re = new RegExp(ts.result),
 			i;
@@ -21,6 +22,23 @@
 		}
 	}
 
-	document.forms.searchForm.addEventListener("submit", searchText, false);
+	function countEntities(e) {
+		e.preventDefault();
+		e.stopPropagation();
 
-}(TextSearch));
+		var matrices = new Matrices(e.currentTarget.elements.matrixText.value),
+			el = document.getElementById("matrixResult"),
+			i;
+
+		el.innerHTML = "";
+		el.insertAdjacentHTML("beforeend", "<pre>" + matrices.getResult() + "</pre>");
+
+		for (i = matrices.errors.length; i--;) {
+			el.insertAdjacentHTML("beforeend", "<div class='error'>" + matrices.errors[i] + "</div>");
+		}
+	}
+
+	document.forms.searchForm.addEventListener("submit", searchText, false);
+	document.forms.matrixForm.addEventListener("submit", countEntities, false);
+
+}());

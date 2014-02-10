@@ -6,13 +6,100 @@
 	<title>Bewerberaufgaben Tests</title>
 	<link rel="stylesheet" href="lib/qunit/qunit.css">
 	<script src="../src/js/text-search.js"></script>
+	<script src="../src/js/matrix.js"></script>
 </head>
 
 <body>
 	<div id="qunit"></div>
-	<div id="qunit-fixture"></div>
+	<div id="qunit-fixture">
+		<div id="textSearch">
+Ein toller Beispieltext ist Blindtext. Er hat ein paar Wörter.
+Dies ist ein Beispieltext, der ein paar Wörter hat und auch noch ein
+paar mehr, um die Zeile etwas länger zu machen. Darüber hinaus ist er
+nur dafür da, um genügend Testtext zusammenzubekommen. Dem Text selbst
+macht das nicht so viel aus. Früher einmal mehr, als er noch nicht so
+selbstbewusst war. Heute kennt er seine Rolle als Blindtext und fügt
+sich selbstbewusst ein. Er ist ja irgendwie wichtig. Manchmal jedoch,
+ganz manchmal, weint er in der Nacht, weil er niemals bis zum Ende
+gelesen wird. Doch das hat ja jetzt zum Glück ein Ende.
+5
+ein
+Beispieltext
+der
+paar
+Wörter
+		</div>
+
+		<div id="matrix">
+			<div data-units="0">
+				1
+				1
+				0
+			</div>
+			<div data-units="1">
+				1
+				1
+				1
+			</div>
+			<div data-units="1">
+				1
+				3
+				1 0 1
+				1 0 1
+				1 1 1
+			</div>
+			<div data-units="1">
+				1
+				5
+				1 0 0 0 1
+				0 1 0 1 0
+				1 0 1 0 1
+				0 1 0 1 0
+				0 0 1 0 0
+			</div>
+			<div data-units="1">
+				1
+				4
+				0 0 1 0
+				1 0 1 0
+				0 1 0 0
+				1 1 1 1
+			</div>
+			<div data-units="3">
+				1
+				4
+				1 0 0 1
+				0 0 0 0
+				0 1 1 0
+				1 0 0 1
+			</div>
+			<div data-units="3">
+				1
+				5
+				1 0 0 1 1
+				0 0 1 0 0
+				0 0 0 0 0
+				1 1 1 1 1
+				0 0 0 0 0
+			</div>
+			<div data-units="9">
+				1
+				8
+				0 0 1 0 0 1 0 0
+				1 0 0 0 0 0 0 1
+				0 0 1 0 0 1 0 1
+				0 1 0 0 0 1 0 0
+				1 0 0 0 0 0 0 0
+				0 0 1 1 0 1 1 0
+				1 0 1 1 0 1 1 0
+				0 0 0 0 0 0 0 0
+			</div>
+		</div>
+	</div>
+
 	<script src="lib/qunit/qunit.js"></script>
 	<script src="text-search.js"></script>
+	<script src="matrix.js"></script>
 </body>
 
 </html>

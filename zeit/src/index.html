@@ -11,6 +11,48 @@
 
 <body>
 	<main>
+		<h1>Aufgabe 2</h1>
+
+		<p>Gegeben sei eine 2-dimensionale Matrix, die aus 1 und 0 besteht. Finden Sie die exakte Anzahl von miteinander verbundenen Einheiten.</p>
+
+		<form name="matrixForm" action="">
+			<fieldset>
+				<label for="matrixText">Eingabe</label>
+				<textarea name="matrixText" id="matrixText">
+4
+4
+0 0 1 0
+1 0 1 0
+0 1 0 0
+1 1 1 1
+4
+1 0 0 1
+0 0 0 0
+0 1 1 0
+1 0 0 1
+5
+1 0 0 1 1
+0 0 1 0 0
+0 0 0 0 0
+1 1 1 1 1
+0 0 0 0 0
+8
+0 0 1 0 0 1 0 0
+1 0 0 0 0 0 0 1
+0 0 1 0 0 1 0 1
+0 1 0 0 0 1 0 0
+1 0 0 0 0 0 0 0
+0 0 1 1 0 1 1 0
+1 0 1 1 0 1 1 0
+0 0 0 0 0 0 0 0
+				</textarea>
+				<input type="submit" value="count units">
+			</fieldset>
+			<div id="matrixResult"></div>
+		</form>
+
+		<hr>
+
 		<h1>Aufgabe 1</h1>
 
 		<p>Gegeben sei ein Textabsatz. Schreiben Sie ein Programm, das den ersten kürzesten Textabschnitt anzeigt, welcher alle gegebenen k Wörter enthält. Ein Abschnitt ist kürzer, wenn er eine kleinere Anzahl Wörter enthält. Berücksichtigen Sie nur Buchstaben aus den Mustergruppen [A-Z] und [a-z]. Groß- und Kleinschreibung sollen bei Vergleichen nicht berücksichtigt werden. Wird kein Abschnitt gefunden, soll "KEIN ABSCHNITT GEFUNDEN" ausgegeben werden.</p>
@@ -42,6 +84,7 @@ Wörter
 	</main>
 
 	<script src="js/zeit.min.js"></script>
+	<script src="http://localhost:35729/livereload.js"></script>
 </body>
 
 </html>

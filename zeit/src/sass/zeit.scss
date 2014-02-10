@@ -27,6 +27,14 @@ textarea {
 	padding: .5em;
 }
 
+hr {
+	margin: 2em 0;
+	border-width: 1px 0 0;
+	border-style: solid;
+	border-color: #ccc;
+	height: 0;
+}
+
 .result {
 	color: #000;
 	background-color: #e7e7e7;

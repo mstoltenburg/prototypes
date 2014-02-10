@@ -2,22 +2,28 @@
 	"use strict";
 
 	var TextSearch = function () {
-		this.input = null;
-		this.text = null;
-		this.words = 0;
-		this.counter = null;
-		this.query = [];
-		this.errors = [];
-		this.result = null;
-
 		this.init.apply(this, arguments);
 	};
 
 	TextSearch.prototype = {
 		maxInputLength: 200000,
+		input: null,
+		text: null,
+		words: 0,
+		counter: null,
+		query: [],
+		errors: [],
+		result: null,
 
 		init: function(input) {
 			this.input = input.trim();
+			this.text = null;
+			this.words = 0;
+			this.counter = null;
+			this.query = [];
+			this.errors = [];
+			this.result = null;
+
 			this.parseInput();
 			this.checkInput();
 			this.searchText();

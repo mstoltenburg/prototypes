@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Font face</title>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link href="css/prism.css" rel="stylesheet" type="text/css">
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<main class="ff">
+
+		<div class="full">
+			<pre><code class="language-markup">
+&lt;article&gt;
+	&lt;h1&gt;Neque porro &lt;em&gt;quisquam est&lt;/em&gt;&lt;/h1&gt;
+	&lt;p&gt;
+		Lorem ipsum &lt;em&gt;dolor sit amet&lt;/em&gt;, &lt;strong&gt;consectetur &lt;em&gt;adipiscing elit&lt;/em&gt;&lt;/strong&gt;.
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;em&gt;Fusce blandit, turpis quis &lt;strong&gt;commodo blandit&lt;/strong&gt;&lt;/em&gt;, erat odio congue turpis, in tristique lorem purus non eros.
+	&lt;/p&gt;
+&lt;/article&gt;
+			</code></pre>
+		</div>
+
+		<article class="fira">
+			<h6>works</h6>
+			<h1>Neque porro <em>quisquam est</em></h1>
+			<p>
+				Lorem ipsum <em>dolor sit amet</em>, <strong>consectetur <em>adipiscing elit</em></strong>.
+			</p>
+			<p>
+				<em>Fusce blandit, turpis quis <strong>commodo blandit</strong></em>, erat odio congue turpis, in tristique lorem purus non eros.
+			</p>
+			<pre><code class="language-scss">
+article {
+	font-family: 'Fira Sans', sans-serif;
+}
+			</code></pre>
+		</article>
+
+		<article class="faux">
+			<h6>faux styles</h6>
+			<h1>Neque porro <em>quisquam est</em></h1>
+			<p>
+				Lorem ipsum <em>dolor sit amet</em>, <strong>consectetur <em>adipiscing elit</em></strong>.
+			</p>
+			<p>
+				<em>Fusce blandit, turpis quis <strong>commodo blandit</strong></em>, erat odio congue turpis, in tristique lorem purus non eros.
+			</p>
+			<pre><code class="language-scss">
+article {
+	font-family: 'Fira Sans Regular', sans-serif;
+}
+			</code></pre>
+		</article>
+
+		<article class="explicit">
+			<h6>sloppy explicit</h6>
+			<h1>Neque porro <em>quisquam est</em></h1>
+			<p>
+				Lorem ipsum <em>dolor sit amet</em>, <strong>consectetur <em>adipiscing elit</em></strong>.
+			</p>
+			<p>
+				<em>Fusce blandit, turpis quis <strong>commodo blandit</strong></em>, erat odio congue turpis, in tristique lorem purus non eros.
+			</p>
+			<pre><code class="language-scss">
+article {
+	font-family: 'Fira Sans Regular', sans-serif;
+
+	h1, strong {
+		font-family: 'Fira Sans Bold', sans-serif;
+	}
+
+	em {
+		font-family: 'Fira Sans Italic', sans-serif;
+	}
+}
+			</code></pre>
+		</article>
+
+		<hr>
+
+		<div class="half">
+			<pre data-line="7-9,16-18,25-27,34-36"><code class="language-scss">
+/**
+ * Recommended @font-face rule
+ * @see http://alistapart.com/article/say-no-to-faux-bold
+ */
+
+@font-face {
+	font-family: 'Fira Sans';
+	font-weight: normal;
+	font-style: normal;
+	src: local('Fira Sans'),
+		local('FiraSans-Regular'),
+		url('../fonts/fira-sans/FiraSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans';
+	font-weight: bold;
+	font-style: normal;
+	src: local('Fira Sans Bold'),
+		local('FiraSans-Bold'),
+		url('../fonts/fira-sans/FiraSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans';
+	font-weight: normal;
+	font-style: italic;
+	src: local('Fira Sans Italic'),
+		local('FiraSans-Italic'),
+		url('../fonts/fira-sans/FiraSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans';
+	font-weight: bold;
+	font-style: italic;
+	src: local('Fira Sans Bold Italic'),
+		local('FiraSans-BoldItalic'),
+		url('../fonts/fira-sans/FiraSans-BoldItalic.otf') format('opentype');
+}
+			</code></pre>
+		</div>
+		<div class="half">
+			<pre data-line="6,11,16,21"><code class="language-scss">
+/**
+ * Common @font-face rule
+ */
+
+@font-face {
+	font-family: 'Fira Sans Regular';
+	src: url('../fonts/fira-sans/FiraSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans Bold';
+	src: url('../fonts/fira-sans/FiraSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans Italic';
+	src: url('../fonts/fira-sans/FiraSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Fira Sans Bold Italic';
+	src: url('../fonts/fira-sans/FiraSans-BoldItalic.otf') format('opentype');
+}
+			</code></pre>
+		</div>
+
+	</main>
+
+	<script src="js/prism.js"></script>
+</body>
+
+</html>

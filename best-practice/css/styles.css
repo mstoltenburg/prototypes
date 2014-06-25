@@ -1,0 +1,108 @@
+/* Basic Styles */
+* {
+  box-sizing: border-box; }
+
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 100%;
+  line-height: 1.4; }
+
+body {
+  color: #333;
+  background-color: #fff;
+  margin: 0;
+  padding: 1rem; }
+
+h1 {
+  font-size: 2em;
+  line-height: 1.2;
+  margin: 0 0 0.625em 0; }
+
+a {
+  color: #369;
+  text-decoration: none; }
+  a:hover {
+    color: #036;
+    text-decoration: underline; }
+
+p {
+  margin: 0 0 1.4em 0; }
+
+/* FONT FACE */
+.ff {
+  margin: 0 -1em;
+  overflow: hidden; }
+  .ff h1, .ff p {
+    margin: 0 0 .5em 0; }
+  .ff h6 {
+    margin: 0;
+    font-size: .5em;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #999; }
+  .ff pre {
+    font-size: 12px;
+    border-radius: 1em; }
+    .ff pre[class*="language-"] {
+      padding-top: 0;
+      padding-bottom: 0; }
+  .ff .full,
+  .ff .half {
+    padding: 0 1rem; }
+  .ff .half {
+    float: left;
+    width: 50%; }
+  .ff hr {
+    clear: both;
+    color: #fff;
+    height: 0;
+    border: 0; }
+  .ff article {
+    float: left;
+    width: 33.33%;
+    padding: 1rem;
+    font-size: 1.875em; }
+    .ff article.fira {
+      font-family: 'Fira Sans', sans-serif; }
+    .ff article.faux {
+      font-family: 'Fira Sans Regular', sans-serif; }
+    .ff article.explicit {
+      font-family: 'Fira Sans Regular', sans-serif; }
+      .ff article.explicit h1, .ff article.explicit strong {
+        font-family: 'Fira Sans Bold', sans-serif; }
+      .ff article.explicit em {
+        font-family: 'Fira Sans Italic', sans-serif; }
+
+@font-face {
+  font-family: 'Fira Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: local("Fira Sans"), local("FiraSans-Regular"), url("../fonts/fira-sans/FiraSans-Regular.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: local("Fira Sans Bold"), local("FiraSans-Bold"), url("../fonts/fira-sans/FiraSans-Bold.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: local("Fira Sans Italic"), local("FiraSans-Italic"), url("../fonts/fira-sans/FiraSans-Italic.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans';
+  font-weight: bold;
+  font-style: italic;
+  src: local("Fira Sans Bold Italic"), local("FiraSans-BoldItalic"), url("../fonts/fira-sans/FiraSans-BoldItalic.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans Regular';
+  src: url("../fonts/fira-sans/FiraSans-Regular.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans Bold';
+  src: url("../fonts/fira-sans/FiraSans-Bold.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans Italic';
+  src: url("../fonts/fira-sans/FiraSans-Italic.otf") format("opentype"); }
+@font-face {
+  font-family: 'Fira Sans Bold Italic';
+  src: url("../fonts/fira-sans/FiraSans-BoldItalic.otf") format("opentype"); }

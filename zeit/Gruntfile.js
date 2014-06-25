@@ -61,6 +61,14 @@ module.exports = function( grunt ) {
 				dest: "build/"
 			}
 		},
+		compass: {
+			dist: {
+				options: {
+					sassDir: 'src/sass',
+					cssDir: 'build/css'
+				}
+			}
+		},
 		sass: {
 			all: {
 				options: {
@@ -85,7 +93,7 @@ module.exports = function( grunt ) {
 			},
 			styles: {
 				files: [ "src/sass/*.scss" ],
-				tasks: "sass"
+				tasks: "compass"
 			},
 			tests: {
 				files: [ "test/*.html", "test/*.js" ],
@@ -103,10 +111,11 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-qunit");
 	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks("grunt-contrib-compass");
 	grunt.loadNpmTasks("grunt-contrib-sass");
 	grunt.loadNpmTasks("grunt-contrib-copy");
 
 	// Default grunt
 	grunt.registerTask( "scripts", [ "jshint", "uglify"] );
-	grunt.registerTask( "default", [ "jshint", "uglify", "qunit", "sass", "copy"] );
+	grunt.registerTask( "default", [ "jshint", "uglify", "qunit", "compass", "copy"] );
 };

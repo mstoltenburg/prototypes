@@ -1,5 +1,6 @@
 // include custom mixins
 @import "mixins";
+@import "compass";
 
 *,
 *:before,
@@ -9,6 +10,7 @@
 
 html {
 	line-height: 1.4;
+	@include background-image(linear-gradient(bottom, red 0%, rgba(0,0,0,0) 60%));
 }
 
 body {

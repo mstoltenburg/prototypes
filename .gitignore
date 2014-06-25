@@ -2,3 +2,4 @@
 /artikel/css/*.css
 /zeit/node_modules/
 /zeit/build/
+/zeit/*.log

@@ -3,7 +3,7 @@ prototypes
 
 bits &amp; peaces
 
-```scss
+```
 /**
  * Examples
  */

@@ -1,0 +1,29 @@
+{
+  "name": "Zeit-Quiz",
+  "version": "0.1.0",
+  "authors": [
+    "Moritz Stoltenburg <moritz.stoltenburg@zeit.de>"
+  ],
+  "description": "Zeit Quiz Prototype",
+  "main": [
+    "./sass/screen.scss",
+    "./js/main.js"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.1",
+    "jquery": "^1",
+    "requirejs": "~2.1.14"
+  }
+}

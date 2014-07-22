@@ -1,0 +1,22 @@
+// include custom mixins
+@import "mixins";
+@import "compass";
+
+*,
+*:before,
+*:after {
+	@include box-sizing(border-box);
+}
+
+html {
+	line-height: 1.4;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+	background-color: #fff;
+	margin: 0;
+	padding: 0 2em 2em;
+	font-size: 1em;
+}

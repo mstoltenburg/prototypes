@@ -1,4 +1,4 @@
-/* globals require, console */
+/* globals require */
 
 // configuration section for require js
 require.config({

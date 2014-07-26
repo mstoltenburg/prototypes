@@ -10,9 +10,47 @@
 </head>
 
 <body>
-	<main></main>
+	<main class="stage">
+		<header class="stage__header">
+			<ul class="dashboard">
+				<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
+				<li id="js-number" class="dashboard__number">4/10</li>
+				<li class="dashboard__link"><a href="#">skip</a></li>
+			</ul>
 
-	<script data-main="js/main" src="js/main"></script>
+			<ul class="progress">
+				<li class="progress__step" data-state="quick"></li>
+				<li class="progress__step" data-state="quick"></li>
+				<li class="progress__step" data-state="fair"></li>
+				<li class="progress__step" data-state="running"></li>
+				<li class="progress__step" data-state="default"></li>
+				<li class="progress__step" data-state="default"></li>
+				<li class="progress__step" data-state="default"></li>
+				<li class="progress__step" data-state="false"></li>
+				<li class="progress__step" data-state="slow"></li>
+				<li class="progress__step" data-state="default"></li>
+			</ul>
+		</header>
+
+		<div class="arena">
+			<div class="question">
+				<div class="question__text">
+					Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag.
+					Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.
+					<em>Welche Rolle spielte der junge Sepp in seinem Team?</em>
+				</div>
+			</div>
+			<div class="answers">
+				<ol class="answers_list">
+					<li class="answer">Er war der beste Stürmer und wurde immer Torschützenkönig.</li>
+					<li class="answer">Er stand natürlich im Tor und galt als „Elfmeter-Killer“.</li>
+					<li class="answer">Meist saß er auf der Bank und diskutierte mit dem Trainer.</li>
+				</ol>
+			</div>
+		</div>
+	</main>
+
+	<script src="js/main.js"></script>
 	<script src="http://localhost:35729/livereload.js"></script>
 </body>
 

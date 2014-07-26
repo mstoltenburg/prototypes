@@ -1,0 +1,52 @@
+$claim-font-size: 20px;
+
+.cover {
+}
+
+.cover__kicker {
+	font-size: 1em;
+	font-weight: normal;
+	margin: .625em 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.cover__claim {
+	font-family: "Franziska", serif;
+	font-weight: 500;
+	font-size: em($claim-font-size);
+	font-size: 6vw;
+	text-align: center;
+	padding: 0 em(20px, $claim-font-size);
+
+	// background-color: #fcc;
+	width: 100%;
+	max-width: 400px;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	@include transform(translate(-50%,-50%));
+}
+
+.button {
+	position: absolute;
+	bottom: 2em;
+	left: 50%;
+	min-width: 8em;
+	margin-left: -4em;
+	display: block;
+	border: none;
+	font-size: 1em;
+	letter-spacing: 2px;
+	padding: .75em 1em;
+	color: #fff;
+	background-color: #000;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 34em) {
+	.cover__claim {
+		font-size: em(28px);
+	}
+}

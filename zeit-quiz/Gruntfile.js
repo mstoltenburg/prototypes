@@ -37,38 +37,27 @@ module.exports = function( grunt ) {
 			}
 		},
 		jshint: {
+			options: {
+				jshintrc: '.jshintrc'
+			},
 			all: {
 				src: [
 					"src/**/*.js"
-				],
-				options: {
-					"curly": true,
-					"eqeqeq": true,
-					"eqnull": true,
-					"expr": true,
-					"immed": true,
-					"noarg": true,
-					"onevar": true,
-					"quotmark": "double",
-					"smarttabs": true,
-					"trailing": true,
-					"undef": true,
-					"unused": true,
-					"node": true,
-					"browser": true,
-					"devel": true,
-					"globals": {
-						"TextSearch": true,
-						"Matrices": true
-					}
-				}
+				]
 			}
 		},
 		copy: {
 			css: {
 				expand: true,
+				flatten: true,
+				filter: 'isFile',
+				src: "bower_components/**/*.css",
+				dest: "build/css/"
+			},
+			fonts: {
+				expand: true,
 				cwd: "src/",
-				src: "css/*",
+				src: "fonts/**",
 				dest: "build/"
 			},
 			html: {
@@ -80,6 +69,7 @@ module.exports = function( grunt ) {
 		},
 		compass: {
 			options: {
+				httpFontsPath: '../fonts',
 				sassDir: 'src/sass',
 				cssDir: 'build/css'
 			},
@@ -111,8 +101,8 @@ module.exports = function( grunt ) {
 				tasks: "scripts"
 			},
 			styles: {
-				files: [ "src/sass/*.scss" ],
-				tasks: "compass"
+				files: [ "src/sass/**/*.scss" ],
+				tasks: "compass:dev"
 			},
 			config: {
 				files: [ "Gruntfile.js" ],
@@ -131,5 +121,5 @@ module.exports = function( grunt ) {
 
 	// Default grunt
 	grunt.registerTask( "scripts", [ "jshint", "requirejs:dev"] );
-	grunt.registerTask( "default", [ "jshint", "requirejs:dev", "bower", "compass", "copy"] );
+	grunt.registerTask( "default", [ "jshint", "requirejs:dist", "bower", "compass:dist", "copy"] );
 };

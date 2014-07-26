@@ -1,0 +1,24 @@
+$base-font-size: 16px;
+
+// Colors
+// @see http://chir.ag/projects/name-that-color
+$cyan: #07e6ff;				// türkis
+$picton-blue: #51b4f4;		// himmelblau
+$gigas: #503d91;			// lila
+$mulberry: #bd5199;			// pflaume
+$wild-strawberry: #ff408d;	// magenta
+$mercury: #e6e6e6;			// grey
+$black: #000;				// black
+$white: #fff;				// white
+
+// State colors
+$color-state-default: $mercury;
+$color-state-quick: $picton-blue;
+$color-state-fair: $wild-strawberry;
+$color-state-false: $black;
+$color-state-slow: $mulberry;
+$color-state-running: $white;
+
+// answer colors
+$color-answer-default: $gigas;
+$color-answer-selected: $wild-strawberry;

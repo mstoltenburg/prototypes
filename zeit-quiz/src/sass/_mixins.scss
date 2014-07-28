@@ -57,3 +57,16 @@
 	     -o-animation: $value;
 	        animation: $value;
 }
+
+@mixin font-size-range($min, $max) {
+	$breakpoint: max-font-screen-width($min, $max);
+
+	font-size: em($min);
+	font-size: vw($min);
+
+	@media screen and (min-width: $breakpoint) {
+		& {
+			font-size: em($max);
+		}
+	}
+}

@@ -9,9 +9,9 @@
     "newcap": true,
 	"noarg": true,
 	"node": true,
-	"quotmark": "double",
+	"quotmark": "single",
 	"undef": true,
-	"unused": true,
+//	"unused": true,
 	"globals": {
 	}
 }

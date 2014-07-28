@@ -1,23 +1,23 @@
 module.exports = function( grunt ) {
-	"use strict";
+	'use strict';
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON( "package.json" ),
+		pkg: grunt.file.readJSON( 'package.json' ),
 		bower: {
 			target: {
-				rjsConfig: "src/js/main.js"
+				rjsConfig: 'src/js/main.js'
 			},
 			options: {
-				exclude: ["modernizr", "requirejs"]
+				exclude: ['modernizr', 'requirejs']
 			}
 		},
 		requirejs: {
 			options: {
 				keepBuildDir: true,
-				baseUrl: "src/js/",
-				mainConfigFile: "src/js/main.js",
-				out: "build/js/main.js",
-				name: "main",
+				baseUrl: 'src/js/',
+				mainConfigFile: 'src/js/main.js',
+				out: 'build/js/main.js',
+				name: 'main',
 				paths: {
 					'requireLib': '../../bower_components/requirejs/require'
 				},
@@ -27,12 +27,12 @@ module.exports = function( grunt ) {
 			},
 			dev: {
 				options: {
-					optimize: "none"
+					optimize: 'none'
 				}
 			},
 			dist: {
 				options: {
-					optimize: "uglify2"
+					optimize: 'uglify2'
 				}
 			}
 		},
@@ -42,7 +42,7 @@ module.exports = function( grunt ) {
 			},
 			all: {
 				src: [
-					"src/**/*.js"
+					'src/**/*.js'
 				]
 			}
 		},
@@ -51,20 +51,20 @@ module.exports = function( grunt ) {
 				expand: true,
 				flatten: true,
 				filter: 'isFile',
-				src: "bower_components/**/*.css",
-				dest: "build/css/"
+				src: 'bower_components/**/*.css',
+				dest: 'build/css/'
 			},
 			fonts: {
 				expand: true,
-				cwd: "src/",
-				src: "fonts/**",
-				dest: "build/"
+				cwd: 'src/',
+				src: 'fonts/**',
+				dest: 'build/'
 			},
 			html: {
 				expand: true,
-				cwd: "src/",
-				src: "*.html",
-				dest: "build/"
+				cwd: 'src/',
+				src: '*.html',
+				dest: 'build/'
 			}
 		},
 		compass: {
@@ -93,33 +93,33 @@ module.exports = function( grunt ) {
 				livereload: true,
 			},
 			html: {
-				files: [ "src/*.html" ],
-				tasks: "copy:html"
+				files: [ 'src/*.html' ],
+				tasks: 'copy:html'
 			},
 			scripts: {
-				files: [ "<%= jshint.all.src %>" ],
-				tasks: "scripts"
+				files: [ '<%= jshint.all.src %>' ],
+				tasks: 'scripts'
 			},
 			styles: {
-				files: [ "src/sass/**/*.scss" ],
-				tasks: "compass:dev"
+				files: [ 'src/sass/**/*.scss' ],
+				tasks: 'compass:dev'
 			},
 			config: {
-				files: [ "Gruntfile.js" ],
-				tasks: "default"
+				files: [ 'Gruntfile.js' ],
+				tasks: 'default'
 			}
 		}
 	});
 
 	// Load required plugins
-	grunt.loadNpmTasks("grunt-contrib-requirejs");
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-bower-requirejs');
-	grunt.loadNpmTasks("grunt-contrib-jshint");
-	grunt.loadNpmTasks("grunt-contrib-watch");
-	grunt.loadNpmTasks("grunt-contrib-compass");
-	grunt.loadNpmTasks("grunt-contrib-copy");
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// Default grunt
-	grunt.registerTask( "scripts", [ "jshint", "requirejs:dev"] );
-	grunt.registerTask( "default", [ "jshint", "requirejs:dist", "bower", "compass:dist", "copy"] );
+	grunt.registerTask( 'scripts', [ 'jshint', 'requirejs:dev'] );
+	grunt.registerTask( 'default', [ 'jshint', 'requirejs:dist', 'bower', 'compass:dist', 'copy'] );
 };

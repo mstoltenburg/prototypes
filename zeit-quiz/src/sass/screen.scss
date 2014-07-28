@@ -7,7 +7,10 @@
 @import "normalize.css";
 
 @import "modules/fonts";
+@import "modules/animations";
 @import "modules/cover";
+@import "modules/header";
+@import "modules/quiz";
 
 *,
 *:before,
@@ -26,18 +29,17 @@ body {
 	margin: 0;
 	padding: 0 2em 2em;
 	font-size: em($base-font-size);
+
+	// danger zone
+	overflow: hidden;
 }
 
 .stage {
-	background-color: #fff;
-	@include box-shadow(0 0 5px rgba(0, 0, 0, .5));
-
 	width: 100%;
-	max-width: 800px;
 	height: 100%;
+	max-width: 800px;
 	max-height: 600px;
 	margin: auto;
-	padding: em(13px) em(7px) em(7px);
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -45,130 +47,35 @@ body {
 	left: 0;
 }
 
-.stage__header {
-	max-width: 320px;
-	margin: 0 auto;
+.perspective {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	@include perspective( 1200px );
 }
 
-.dashboard,
-.progress {
+.page {
+	@include box-shadow(0 0 5px rgba(0, 0, 0, .5));
+	background-color: #fff;
+	padding: em(13px) em(7px) em(7px);
+
 	width: 100%;
-	margin: 0;
-	padding: 0;
-	list-style: none;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
 	overflow: hidden;
-
-	li {
-		float: left;
-	}
+	@include backface-visibility( hidden );
+	@include transform( translate3d(0, 0, 0) );
+	@include transform-style( preserve-3d );
 }
 
-.dashboard__item {
-	width: 25%;
-
-	&[data-state="quick"] { color: $color-state-quick; }
-	&[data-state="fair"]  { color: $color-state-fair; }
-	&[data-state="false"] { color: $color-state-false; }
-	&[data-state="slow"]  { color: $color-state-slow; }
+.page--current {
+	visibility: visible;
+	z-index: 1;
 }
 
-.dashboard__number {
-	width: 50%;
-	text-align: center;
-}
-
-.dashboard__link {
-	width: 25%;
-	text-align: right;
-
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-}
-
-.progress {
-	margin: .5em 0;
-}
-
-.progress__step {
-	width: 10%;
-	height: .25em;
-	background-color: $color-state-default;
-	// border-right: 1px solid #fff;
-	@include box-shadow(inset -1px 0 1px -1px #fff);
-
-	&:last-child {
-		@include box-shadow(none);
-	}
-
-	&[data-state="quick"]   { background-color: $color-state-quick; }
-	&[data-state="fair"]    { background-color: $color-state-fair; }
-	&[data-state="false"]   { background-color: $color-state-false; }
-	&[data-state="slow"]    { background-color: $color-state-slow; }
-	&[data-state="running"] { background-color: $color-state-running; }
-}
-
-.arena {
-	display: table;
-	width: 100%;
-	max-width: em(576px);
-	height: 90%;
-	margin: 0 auto;
-	// height: calc(100% - 42px);
-	// background-color: #fcc;
-}
-
-.question {
-	display: table-row;
-	height: 50%;
-}
-
-.question__text {
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 5vw;
-
-	font-family: "Franziska", serif;
-	font-weight: 500;
-	padding: 0 em(8px);
-}
-
-.answers {
-	display: table-row;
-	height: 50%;
-}
-
-.answers_list {
-	display: table-cell;
-	vertical-align: bottom;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.answer {
-	color: #fff;
-	background-color: $color-answer-default;
-	margin: 1px auto 0;
-	padding: em(12px) em(8px);
-	max-width: 320px;
-	cursor: pointer;
-
-	&[data-state="selected"] { background-color: $color-answer-selected; }
-	&[data-state="false"] {
-		color: $color-answer-selected;
-		background-color: none;
-		text-decoration: line-through;
-	}
-}
-
-$desktop-size: em(576px);
-
-@media screen and (min-width: $desktop-size) {
-	.question__text {
-		font-size: em(24px);
-		padding: 0;
-	}
+.page--ontop {
+	z-index: 999;
 }

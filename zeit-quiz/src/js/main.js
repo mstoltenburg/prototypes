@@ -6,9 +6,13 @@ require.config({
 
 	},
 	paths: {
-		jquery: "../../bower_components/jquery/dist/jquery"
+		jquery: '../../bower_components/jquery/dist/jquery'
 	},
 	packages: [
 
 	]
+});
+
+require(['modules/quiz'], function(quiz) {
+	quiz.init();
 });

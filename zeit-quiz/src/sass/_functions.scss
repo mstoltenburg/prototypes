@@ -2,3 +2,25 @@
 	@if $target == 0 { @return 0 }
 	@return $target / $context + 0em;
 }
+
+@function vw($font-size) {
+	$percent: $font-size / 320px;
+	@return $percent * 100vw;
+}
+
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+/**
+ * Compute screen min-width for max-font-size
+ * @function  max-font-screen-width
+ * @param     $min-font-size {Number} the minimum font size in pixel
+ * @param     $max-font-size {Number} the maximum font size in pixel
+ * @return    {Number} max screen width in em
+ */
+@function max-font-screen-width($min-font-size, $max-font-size) {
+	// $rel-width: vw($min-font-size);
+	$max-width: $max-font-size * (100vw / vw($min-font-size));
+	@return em($max-width);
+}

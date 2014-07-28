@@ -1,4 +1,5 @@
-$claim-font-size: 20px;
+$claim-min-font-size: 20px;
+$claim-max-font-size: 28px;
 
 .cover {
 }
@@ -12,12 +13,12 @@ $claim-font-size: 20px;
 }
 
 .cover__claim {
+	@include font-size-range($claim-min-font-size, $claim-max-font-size);
+
 	font-family: "Franziska", serif;
 	font-weight: 500;
-	font-size: em($claim-font-size);
-	font-size: 6vw;
 	text-align: center;
-	padding: 0 em(20px, $claim-font-size);
+	padding: 0 em(20px, $claim-min-font-size);
 
 	// background-color: #fcc;
 	width: 100%;
@@ -43,10 +44,4 @@ $claim-font-size: 20px;
 	background-color: #000;
 	text-transform: uppercase;
 	cursor: pointer;
-}
-
-@media screen and (min-width: 34em) {
-	.cover__claim {
-		font-size: em(28px);
-	}
 }

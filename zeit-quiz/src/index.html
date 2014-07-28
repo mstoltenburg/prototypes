@@ -11,42 +11,183 @@
 
 <body>
 	<main class="stage">
-		<header class="stage__header">
-			<ul class="dashboard">
-				<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
-				<li id="js-number" class="dashboard__number">4/10</li>
-				<li class="dashboard__link"><a href="#">skip</a></li>
-			</ul>
+		<div class="perspective">
 
-			<ul class="progress">
-				<li class="progress__step" data-state="quick"></li>
-				<li class="progress__step" data-state="quick"></li>
-				<li class="progress__step" data-state="fair"></li>
-				<li class="progress__step" data-state="running"></li>
-				<li class="progress__step" data-state="default"></li>
-				<li class="progress__step" data-state="default"></li>
-				<li class="progress__step" data-state="default"></li>
-				<li class="progress__step" data-state="false"></li>
-				<li class="progress__step" data-state="slow"></li>
-				<li class="progress__step" data-state="default"></li>
-			</ul>
-		</header>
+			<!-- Cover -->
 
-		<div class="arena">
-			<div class="question">
-				<div class="question__text">
-					Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag.
-					Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.
-					<em>Welche Rolle spielte der junge Sepp in seinem Team?</em>
+			<div class="page">
+				<header>
+					<h1 class="cover__kicker">Fussball</h1>
+				</header>
+				<div class="cover__claim">
+					Wie gut kennen Sie das Urviech im Bayern-Tor?
+				</div>
+				<button class="button js-start-quiz">
+					Spielen
+				</button>
+			</div>
+
+			<!-- Page -->
+
+			<div class="page">
+				<header class="stage__header">
+					<ul class="dashboard">
+						<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
+						<li id="js-number" class="dashboard__number">1/10</li>
+						<li class="dashboard__link"><a href="#" class="js-next-page">skip</a></li>
+					</ul>
+
+					<ul class="progress">
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="fair"></li>
+						<li class="progress__step" data-state="running"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="false"></li>
+						<li class="progress__step" data-state="slow"></li>
+						<li class="progress__step" data-state="default"></li>
+					</ul>
+				</header>
+
+				<div class="arena">
+					<div class="question">
+						<div class="question__text">
+							Frage 1
+						</div>
+					</div>
+					<div class="answers">
+						<ol class="answers_list">
+						</ol>
+					</div>
 				</div>
 			</div>
-			<div class="answers">
-				<ol class="answers_list">
-					<li class="answer">Er war der beste Stürmer und wurde immer Torschützenkönig.</li>
-					<li class="answer">Er stand natürlich im Tor und galt als „Elfmeter-Killer“.</li>
-					<li class="answer">Meist saß er auf der Bank und diskutierte mit dem Trainer.</li>
-				</ol>
+
+			<!-- Page -->
+
+			<div class="page">
+				<header class="stage__header">
+					<ul class="dashboard">
+						<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
+						<li id="js-number" class="dashboard__number">1/10</li>
+						<li class="dashboard__link"><a href="#" class="js-next-page">skip</a></li>
+					</ul>
+
+					<ul class="progress">
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="fair"></li>
+						<li class="progress__step" data-state="running"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="false"></li>
+						<li class="progress__step" data-state="slow"></li>
+						<li class="progress__step" data-state="default"></li>
+					</ul>
+				</header>
+
+				<div class="arena">
+					<div class="question">
+						<div class="question__text">
+							Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag.
+							Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.
+							<em>Welche Rolle spielte der junge Sepp in seinem Team?</em>
+						</div>
+					</div>
+					<div class="answers">
+						<ol class="answers_list">
+							<li class="answer js-answer">Er war der beste Stürmer und wurde immer Torschützenkönig.</li>
+							<li class="answer js-answer">Er stand natürlich im Tor und galt als „Elfmeter-Killer“.</li>
+							<li class="answer js-answer">Meist saß er auf der Bank und diskutierte mit dem Trainer.</li>
+						</ol>
+					</div>
+				</div>
 			</div>
+
+			<!-- Page -->
+
+			<div class="page">
+				<header class="stage__header">
+					<ul class="dashboard">
+						<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
+						<li id="js-number" class="dashboard__number">2/10</li>
+						<li class="dashboard__link"><a href="#" class="js-next-page">skip</a></li>
+					</ul>
+
+					<ul class="progress">
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="fair"></li>
+						<li class="progress__step" data-state="running"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="false"></li>
+						<li class="progress__step" data-state="slow"></li>
+						<li class="progress__step" data-state="default"></li>
+					</ul>
+				</header>
+
+				<div class="arena">
+					<div class="question">
+						<div class="question__text">
+							<em>Was gibt es seit der Rückrunde 2002/2003 in der Fußballbundesliga?</em>
+						</div>
+					</div>
+					<div class="answers">
+						<ol class="answers_list">
+							<li class="answer js-answer">12 Spieler pro Mannschaft</li>
+							<li class="answer js-answer">Vierter Schiedsrichter</li>
+							<li class="answer js-answer">3 Tore auf dem Platz</li>
+							<li class="answer js-answer">Zwölfmeter</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+
+			<!-- Page -->
+
+			<div class="page">
+				<header class="stage__header">
+					<ul class="dashboard">
+						<li id="js-timer" class="dashboard__item" data-state="quick">0”</li>
+						<li id="js-number" class="dashboard__number">3/10</li>
+						<li class="dashboard__link"><a href="#" class="js-next-page">skip</a></li>
+					</ul>
+
+					<ul class="progress">
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="quick"></li>
+						<li class="progress__step" data-state="fair"></li>
+						<li class="progress__step" data-state="running"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="false"></li>
+						<li class="progress__step" data-state="slow"></li>
+						<li class="progress__step" data-state="default"></li>
+					</ul>
+				</header>
+
+				<div class="arena">
+					<div class="question">
+						<div class="question__text">
+							<em>Wann wurde die 2.Bundesliga eingeführt?</em>
+						</div>
+					</div>
+					<div class="answers">
+						<ol class="answers_list">
+							<li class="answer js-answer">1968</li>
+							<li class="answer js-answer">1971</li>
+							<li class="answer js-answer">1974</li>
+							<li class="answer js-answer">1975</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</main>
 

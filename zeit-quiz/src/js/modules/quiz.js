@@ -1,5 +1,6 @@
 /* global define */
 define( ['jquery'], function( $ ) {
+	'use strict';
 
 	var questions = [
 		{
@@ -21,7 +22,7 @@ define( ['jquery'], function( $ ) {
 			]
 		},
 		{
-			question: 'Wann wurde die 2.Bundesliga eingeführt?',
+			question: 'Wann wurde die 2. Bundesliga eingeführt?',
 			answers: [
 				{text: '1968', correct: false},
 				{text: '1971', correct: false},
@@ -36,6 +37,39 @@ define( ['jquery'], function( $ ) {
 		'OAnimation': 'oAnimationEnd',
 		'msAnimation': 'MSAnimationEnd',
 		'animation': 'animationend'
+	};
+
+	var entityMap = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;'
+	};
+
+	var escapeHtml = function( string ) {
+		// var entityRegExp = new RegExp('[' + Object.keys(entityMap).join('') + ']', 'g');
+
+		return String( string ).replace(/[&<>"]/g, function( m ) {
+			return entityMap[m];
+		});
+	};
+
+	var shuffleArray = function( a ) {
+		var m = a.length, t, i;
+
+		// While there remain elements to shuffle…
+		while ( m ) {
+
+			// Pick a remaining element…
+			i = Math.floor( Math.random() * m-- );
+
+			// And swap it with the current element.
+			t = a[m];
+			a[m] = a[i];
+			a[i] = t;
+		}
+
+		return a;
 	};
 
 	var getTransitionPrefix = function() {
@@ -69,12 +103,19 @@ define( ['jquery'], function( $ ) {
 		currentQuestion: 0,
 		pages: [],
 		cards: [],
-		length: questions.length,
+		questions: questions,
+		total: questions.length,
 		isAnimating: false,
 		endThisPage: false,
 		endNextPage: false,
-		outClass: 'pt-page-rotateSlideOut', // 67 60 34 64 17
-		inClass: 'pt-page-rotateSlideIn',
+		outClass: 'pt-swap',
+		inClass: 'pt-swap',
+		number: $( '#js-number' ),
+		timer:  {
+			time: 0,
+			interval: null,
+			display: $( '#js-timer' )
+		},
 
 		start: function( e ) {
 			this.nextPage( e );
@@ -96,11 +137,11 @@ define( ['jquery'], function( $ ) {
 			if ( isCard ) {
 				$thisPage = this.cards.eq( this.currentQuestion++ );
 				$nextPage = this.cards.eq( this.currentQuestion ).addClass( 'page--current' );
-				this.setAnimation(7);
+				this.setAnimation( 0 ); // 7
 			} else {
 				$thisPage = this.pages.eq( this.currentPage++ );
 				$nextPage = this.pages.eq( this.currentPage ).addClass( 'page--current' );
-				this.setAnimation(67);
+				this.setAnimation( 67 ); // 67 60 34 64 17
 			}
 
 			$thisPage.addClass( this.outClass ).on( animEndEventName, function() {
@@ -109,7 +150,7 @@ define( ['jquery'], function( $ ) {
 				if ( that.endNextPage ) {
 					that.onEndAnimation( $thisPage, $nextPage );
 				}
-			} );
+			});
 
 			$nextPage.addClass( this.inClass ).on( animEndEventName, function() {
 				$nextPage.off( animEndEventName );
@@ -117,7 +158,7 @@ define( ['jquery'], function( $ ) {
 				if ( that.endthisPage ) {
 					that.onEndAnimation( $thisPage, $nextPage );
 				}
-			} );
+			});
 		},
 
 		onEndAnimation: function( $outpage, $inpage ) {
@@ -125,7 +166,7 @@ define( ['jquery'], function( $ ) {
 			this.endNextPage = false;
 			this.resetPage( $outpage, $inpage );
 			this.isAnimating = false;
-			this.showQuestion( $inpage );
+			this.showQuestion();
 		},
 
 		resetPage: function( $outpage, $inpage ) {
@@ -133,15 +174,102 @@ define( ['jquery'], function( $ ) {
 			$inpage.removeClass( this.inClass );
 		},
 
-		showQuestion: function( $page ) {
-			var x;
+		startTimer: function() {
+			var that = this;
 
+			this.stopTimer();
+			this.timer.time = 0;
+			this.timer.interval = setInterval( function () { that.meter(); }, 1000 );
+			this.meter();
+		},
+
+		stopTimer: function() {
+			clearInterval( this.timer.interval );
+		},
+
+		meter: function () {
+			var seconds = this.timer.time % 60,
+				minutes = Math.floor( this.timer.time / 60 ) % 60,
+				hours = Math.floor( this.timer.time / 3600 ),
+				state = 'slow';
+
+			if ( hours || minutes ) {
+				if ( seconds < 10 ) {
+					seconds = '0' + seconds;
+				}
+				seconds = ':' + seconds;
+			}
+
+			if ( hours ) {
+				if ( minutes < 10 ) {
+					minutes = '0' + minutes;
+				}
+				minutes = ':' + minutes;
+			}
+
+			if ( this.timer.time < 10 ) {
+				state = 'quick';
+			} else if ( this.timer.time < 30 ) {
+				state = 'fair';
+			}
+
+			this.timer.display
+				.html( hours + minutes + seconds + '”' )
+				.attr( 'data-state', state );
+
+			this.timer.time++;
+		},
+
+		showQuestion: function() {
+			var that = this,
+				$card = this.cards.eq( this.currentQuestion );
+
+			this.initHeader();
+
+			$card.addClass( 'card--active' ).on( animEndEventName, function( e ) {
+				if ( e.target.className === 'answers') {
+					$card.off( animEndEventName );
+					that.startTimer();
+				}
+			});
 		},
 
 		selectAnswer: function( e ) {
-			var target = $( e.target );
+			var $selection = $( e.target ),
+				$others = $selection.siblings(),
+				others = $others.get(),
+				l = $others.length,
+				c = 1,
+				i,
+				a,
+				w;
 
-			target.attr({ 'data-state': 'selected' });
+			var setState = function( a, state ) {
+				setTimeout( function() {
+					a.setAttribute( 'data-state', state );
+				}, 900 * ++c );
+			};
+
+			$selection.attr( { 'data-state': 'selected' } );
+			this.stopTimer();
+
+			while ( l ) {
+				i = Math.floor( Math.random() * l-- );
+				a = others.splice( i, 1 ).pop();
+
+				if ( a.getAttribute( 'data-correct' ) === 'true' ) {
+					w = a;
+				} else {
+					setState( a, 'solved' );
+				}
+			}
+
+			if ( !$selection.data( 'correct' ) ) {
+				setState( $selection.get(0), 'false' );
+				setState( w, 'correct' );
+			} else {
+				setState( $selection.get(0), 'correct' );
+			}
 		},
 
 		setAnimation: function( animation ) {
@@ -149,6 +277,10 @@ define( ['jquery'], function( $ ) {
 
 			switch( animation ) {
 
+				case 0:
+					outClass = 'pt-swap';
+					inClass = 'pt-swap';
+					break;
 				case 1:
 					outClass = 'pt-page-moveToLeft';
 					inClass = 'pt-page-moveFromRight';
@@ -424,13 +556,50 @@ define( ['jquery'], function( $ ) {
 			this.inClass = inClass;
 		},
 
-		initCards: function() {
+		initHeader: function() {
+			this.timer.display.html( '0”' );
+			this.number.html( (this.currentQuestion + 1) + '/' + this.total );
+		},
 
+		initCards: function() {
+			var cardTemplate = $.trim( $( '#js-card-template' ).html() ),
+				answerTemplate = $.trim( $( '#js-answer-template' ).html() ),
+				cards = [],
+				answers = [],
+				q,
+				i,
+				a;
+
+			for ( i = 0; i < this.total; i++ ) {
+				q = this.questions[i];
+				q.no = i + 1;
+				answers = [];
+
+				shuffleArray(q.answers);
+
+				for ( a = q.answers.length; a--; ) {
+					answers.push( this.format( answerTemplate, q.answers[a] ) );
+				}
+
+				cards.push( this.format( cardTemplate.replace( /\{answers\}/, answers.join('') ), q ) );
+			}
+
+			$( '#js-cards' ).html( cards.join('') );
+
+			this.initHeader();
+		},
+
+		format: function( string, map ) {
+			return String( string ).replace( /\{(\w+)\}/g, function( match, key ) {
+				return ( key in map ) ? escapeHtml( map[key] ) : '';
+			});
 		},
 
 		init: function() {
 			var that = this,
 				node = $( 'main' );
+
+			this.initCards();
 
 			this.pages = node.find( '.page' );
 			this.cards = node.find( '.card' );
@@ -441,6 +610,7 @@ define( ['jquery'], function( $ ) {
 			node.on( 'click', '.js-start-quiz', function( e ) { that.start( e ); } );
 			node.on( 'click', '.js-skip', function( e ) { that.nextPage( e, true ); } );
 			node.on( 'click', '.js-answer', function( e ) { that.selectAnswer( e ); } );
+
 		}
 	};
 

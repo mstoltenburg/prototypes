@@ -10,7 +10,20 @@
 	background-color: #fff;
 }
 
-.card_content {
+.card__intro {
+	position: absolute;
+	top: 45%;
+	width: 100%;
+	text-align: center;
+
+	@include font-size-range(16px, 24px);
+	font-family: "Franziska", serif;
+	font-weight: 500;
+
+	opacity: 0;
+}
+
+.card__content {
 	display: table;
 	width: 100%;
 	height: 100%;
@@ -19,15 +32,15 @@
 .question {
 	display: table-row;
 	height: 50%;
+	opacity: 0;
 }
 
 .question__text {
-	@include font-size-range(16px, 24px);
-
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
 
+	@include font-size-range(16px, 24px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
 	padding: 0 em(8px);
@@ -36,6 +49,7 @@
 .answers {
 	display: table-row;
 	height: 50%;
+	opacity: 0;
 }
 
 .answers_list {
@@ -47,21 +61,119 @@
 }
 
 .answer {
+	position: relative;
 	color: #fff;
 	background-color: $color-answer-default;
 	margin: 1px auto 0;
 	padding: em(12px) em(8px);
 	max-width: 320px;
 	cursor: pointer;
+	@include transition(background-color .5s);
 
 	&:hover,
 	&[data-state="selected"] {
 		background-color: $color-answer-selected;
 	}
 
+	/*
+	&[data-state="selected"] {
+		&::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			content: "";
+			z-index: 10;
+
+			@include box-shadow(0 0 2px $color-answer-default, inset 0 0 2px 1px $color-answer-default);
+
+			$answer-animation: fetz .5s both;
+
+			-webkit-animation: $answer-animation;
+			        animation: $answer-animation;
+		}
+	}
+	*/
+
 	&[data-state="false"] {
 		color: $color-answer-selected;
-		background-color: none;
+		background-color: transparent;
 		text-decoration: line-through;
 	}
+
+	&[data-state="solved"] {
+		color: $white;
+		background-color: $white;
+	}
+
+	&[data-state="correct"] {
+		$answer-animation: fetz .1s both;
+
+		-webkit-animation: $answer-animation;
+		        animation: $answer-animation;
+	}
 }
+
+.pt-swap {
+	-webkit-animation: swap 0.015s ease both;
+	        animation: swap 0.015s ease both;
+}
+
+// Animations
+
+$card-intro-duration: 3ms;
+$card-text-duration: 2ms;
+$card-list-duration: 2ms;
+$card-timing-function: ease-out;
+
+$card-intro-animation: cardFadeIn $card-intro-duration/2 $card-timing-function 2 alternate both;
+$card-text-animation: cardFadeIn $card-text-duration $card-timing-function $card-intro-duration both;
+$card-list-animation: cardFadeIn $card-list-duration $card-timing-function ($card-intro-duration + $card-text-duration) both;
+
+.card--active {
+	.card__intro {
+		-webkit-animation: $card-intro-animation;
+		        animation: $card-intro-animation;
+	}
+	.question {
+		-webkit-animation: $card-text-animation;
+		        animation: $card-text-animation;
+	}
+	.answers {
+		-webkit-animation: $card-list-animation;
+		        animation: $card-list-animation;
+	}
+}
+
+// Keyframes
+
+@-webkit-keyframes fetz {
+	0%   { -webkit-transform: scale(1); }
+	50%  { -webkit-transform: scale(1.1); }
+	100% { -webkit-transform: scale(1); }
+}
+@keyframes fetz {
+	0%   { transform: scale(1); }
+	50%  { transform: scale(1.1); }
+	100% { transform: scale(1); }
+}
+
+@-webkit-keyframes swap {
+	0%   {  }
+	100% { opacity: 1; }
+}
+@keyframes swap {
+	0%   {  }
+	100% { opacity: 1; }
+}
+
+@-webkit-keyframes cardFadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes cardFadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+

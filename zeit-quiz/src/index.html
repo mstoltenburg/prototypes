@@ -54,61 +54,6 @@
 				<div class="arena">
 					<div id="js-cards" class="perspective">
 
-						<div class="card">
-							<div class="card_content">
-								<div class="question">
-									<div class="question__text">
-										Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag.
-										Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.
-										<em>Welche Rolle spielte der junge Sepp in seinem Team?</em>
-									</div>
-								</div>
-								<div class="answers">
-									<ol class="answers_list">
-										<li class="answer js-answer">Er war der beste Stürmer und wurde immer Torschützenkönig.</li>
-										<li class="answer js-answer">Er stand natürlich im Tor und galt als „Elfmeter-Killer“.</li>
-										<li class="answer js-answer">Meist saß er auf der Bank und diskutierte mit dem Trainer.</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card_content">
-								<div class="question">
-									<div class="question__text">
-										<em>Was gibt es seit der Rückrunde 2002/2003 in der Fußballbundesliga?</em>
-									</div>
-								</div>
-								<div class="answers">
-									<ol class="answers_list">
-										<li class="answer js-answer">12 Spieler pro Mannschaft</li>
-										<li class="answer js-answer">Vierter Schiedsrichter</li>
-										<li class="answer js-answer">3 Tore auf dem Platz</li>
-										<li class="answer js-answer">Zwölfmeter</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card_content">
-								<div class="question">
-									<div class="question__text">
-										<em>Wann wurde die 2.Bundesliga eingeführt?</em>
-									</div>
-								</div>
-								<div class="answers">
-									<ol class="answers_list">
-										<li class="answer js-answer">1968</li>
-										<li class="answer js-answer">1971</li>
-										<li class="answer js-answer">1974</li>
-										<li class="answer js-answer">1975</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>
@@ -116,6 +61,29 @@
 		</div>
 	</main>
 
+	<script type="text/template" id="js-card-template">
+		<div class="card">
+			<div class="card__intro">
+				Frage {no}
+			</div>
+			<div class="card__content">
+				<div class="question">
+					<div class="question__text">
+						{description}
+						<em>{question}</em>
+					</div>
+				</div>
+				<div class="answers">
+					<ol class="answers_list">
+						{answers}
+					</ol>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script type="text/template" id="js-answer-template">
+		<li class="answer js-answer" data-correct="{correct}">{text}</li>
+	</script>
 	<script src="js/main.js"></script>
 	<script src="http://localhost:35729/livereload.js"></script>
 </body>

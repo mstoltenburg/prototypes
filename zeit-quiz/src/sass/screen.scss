@@ -6,8 +6,8 @@
 
 @import "normalize.css";
 
-@import "modules/fonts";
 @import "modules/animations";
+@import "modules/fonts";
 @import "modules/cover";
 @import "modules/header";
 @import "modules/quiz";
@@ -80,5 +80,5 @@ body {
 }
 
 .pt-page-ontop {
-	z-index: 999;
+	z-index: 9;
 }

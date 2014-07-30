@@ -141,7 +141,7 @@ define( ['jquery'], function( $ ) {
 
 				$thisPage = this.cards.eq( this.currentQuestion++ );
 				$nextPage = this.cards.eq( this.currentQuestion ).addClass( 'page--current' );
-				this.setAnimation( 0 ); // 7
+				this.setAnimation( 69 ); // 7
 				this.stopTimer();
 			} else {
 				$thisPage = this.pages.eq( this.currentPage++ );

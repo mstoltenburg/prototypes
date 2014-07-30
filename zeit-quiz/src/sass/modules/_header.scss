@@ -50,6 +50,7 @@
 	background-color: $color-state-default;
 	// border-right: 1px solid #fff;
 	@include box-shadow(inset -1px 0 1px -1px #fff);
+	@include transition(background-color .2s);
 
 	&:last-child {
 		@include box-shadow(none);

@@ -37,16 +37,16 @@
 						<li class="dashboard__link"><a href="#" class="js-skip">skip</a></li>
 					</ul>
 
-					<ul class="progress">
-						<li class="progress__step" data-state="quick"></li>
-						<li class="progress__step" data-state="quick"></li>
-						<li class="progress__step" data-state="fair"></li>
-						<li class="progress__step" data-state="running"></li>
+					<ul id="js-progress" class="progress">
 						<li class="progress__step" data-state="default"></li>
 						<li class="progress__step" data-state="default"></li>
 						<li class="progress__step" data-state="default"></li>
-						<li class="progress__step" data-state="false"></li>
-						<li class="progress__step" data-state="slow"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
+						<li class="progress__step" data-state="default"></li>
 						<li class="progress__step" data-state="default"></li>
 					</ul>
 				</header>
@@ -64,7 +64,9 @@
 	<script type="text/template" id="js-card-template">
 		<div class="card">
 			<div class="card__intro">
-				Frage {no}
+				<div class="card__text">
+					Frage {no}
+				</div>
 			</div>
 			<div class="card__content">
 				<div class="question">

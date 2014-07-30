@@ -15,12 +15,14 @@
 	top: 45%;
 	width: 100%;
 	text-align: center;
+	// opacity: 0;
+}
 
+// needed for iOS font-size bug
+.card__text {
 	@include font-size-range(16px, 24px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
-
-	opacity: 0;
 }
 
 .card__content {
@@ -122,12 +124,12 @@
 
 // Animations
 
-$card-intro-duration: 3s;
+$card-intro-duration: 2s;
 $card-text-duration: 2s;
 $card-list-duration: 2s;
 $card-timing-function: ease-out;
 
-$card-intro-animation: fadeIn $card-intro-duration/2 $card-timing-function 2 alternate both;
+$card-intro-animation: fadeOut $card-intro-duration $card-timing-function both;
 $card-text-animation: fadeIn $card-text-duration $card-timing-function $card-intro-duration both;
 $card-list-animation: fadeIn $card-list-duration $card-timing-function ($card-intro-duration + $card-text-duration) both;
 

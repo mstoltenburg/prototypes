@@ -116,6 +116,10 @@ define( ['jquery'], function( $ ) {
 			interval: null,
 			display: $( '#js-timer' )
 		},
+		progress:  {
+			speed: 'quick',
+			display: $( '#js-progress' ).children()
+		},
 
 		start: function( e ) {
 			this.nextPage( e );
@@ -205,8 +209,7 @@ define( ['jquery'], function( $ ) {
 		meter: function () {
 			var seconds = this.timer.time % 60,
 				minutes = Math.floor( this.timer.time / 60 ) % 60,
-				hours = Math.floor( this.timer.time / 3600 ),
-				state = 'slow';
+				hours = Math.floor( this.timer.time / 3600 );
 
 			if ( hours || minutes ) {
 				if ( seconds < 10 ) {
@@ -223,14 +226,16 @@ define( ['jquery'], function( $ ) {
 			}
 
 			if ( this.timer.time < 10 ) {
-				state = 'quick';
+				this.progress.speed = 'quick';
 			} else if ( this.timer.time < 30 ) {
-				state = 'fair';
+				this.progress.speed = 'fair';
+			} else {
+				this.progress.speed = 'slow';
 			}
 
 			this.timer.display
 				.html( hours + minutes + seconds + '”' )
-				.attr( 'data-state', state );
+				.attr( 'data-state', this.progress.speed );
 
 			this.timer.time++;
 		},
@@ -249,6 +254,10 @@ define( ['jquery'], function( $ ) {
 			});
 		},
 
+		setProgress: function( state ) {
+			this.progress.display.eq( this.currentQuestion ).attr( 'data-state', state );
+		},
+
 		selectAnswer: function( e ) {
 			var that = this,
 				$selection = $( e.target ),
@@ -261,13 +270,17 @@ define( ['jquery'], function( $ ) {
 				a,
 				w;
 
-			var setState = function( a, state ) {
+			var setState = function( a, state, progress ) {
 				setTimeout( function() {
 					a.setAttribute( 'data-state', state );
+
+					if ( progress ) {
+						that.setProgress( progress );
+					}
 				}, delay * ++c );
 			};
 
-			$selection.attr( { 'data-state': 'selected' } );
+			$selection.attr( 'data-state', 'selected' );
 			this.stopTimer();
 
 			while ( l ) {
@@ -281,11 +294,11 @@ define( ['jquery'], function( $ ) {
 				}
 			}
 
-			if ( !$selection.data( 'correct' ) ) {
+			if ( w ) {
 				setState( $selection.get(0), 'false' );
-				setState( w, 'correct' );
+				setState( w, 'correct', 'false' );
 			} else {
-				setState( $selection.get(0), 'correct selected' );
+				setState( $selection.get(0), 'correct selected', this.progress.speed );
 			}
 
 			setTimeout( function() {
@@ -640,6 +653,13 @@ define( ['jquery'], function( $ ) {
 			node.on( 'click', '.js-skip', function( e ) { that.nextPage( e, true ); } );
 			node.on( 'click', '.js-answer', function( e ) { that.selectAnswer( e ); } );
 
+			// on document ready
+			// $( function( e ) {
+			// 	// Hide the address bar
+			// 	setTimeout( function() {
+			// 		window.scrollTo( 0, 1 );
+			// 	}, 0);
+			// });
 		}
 	};
 

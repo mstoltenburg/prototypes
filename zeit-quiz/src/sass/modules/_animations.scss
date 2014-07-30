@@ -130,11 +130,11 @@
 	from { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
 }
 
-@-webkit-keyframes moveToRight { 
+@-webkit-keyframes moveToRight {
 	from { }
 	to { -webkit-transform: translateX(100%); }
 }
-@keyframes moveToRight { 
+@keyframes moveToRight {
 	from { }
 	to { -webkit-transform: translateX(100%); transform: translateX(100%); }
 }
@@ -1286,6 +1286,10 @@
 .pt-page-delay500 {
 	-webkit-animation-delay: .5s;
 	animation-delay: .5s;
+}
+.pt-page-delay600 {
+	-webkit-animation-delay: .6s;
+	animation-delay: .6s;
 }
 .pt-page-delay700 {
 	-webkit-animation-delay: .7s;

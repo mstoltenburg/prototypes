@@ -20,7 +20,7 @@
 	font-family: "Franziska", serif;
 	font-weight: 500;
 
-	opacity: 0;
+	opacity: 1;
 }
 
 .card__content {
@@ -71,12 +71,12 @@
 	@include transition(background-color .5s);
 
 	&:hover,
-	&[data-state="selected"] {
+	&[data-state~="selected"] {
 		background-color: $color-answer-selected;
 	}
 
 	/*
-	&[data-state="selected"] {
+	&[data-state~="selected"] {
 		&::before {
 			position: absolute;
 			top: 0;
@@ -96,40 +96,40 @@
 	}
 	*/
 
-	&[data-state="false"] {
+	&[data-state~="false"] {
 		color: $color-answer-selected;
 		background-color: transparent;
 		text-decoration: line-through;
 	}
 
-	&[data-state="solved"] {
+	&[data-state~="solved"] {
 		color: $white;
 		background-color: $white;
 	}
 
-	&[data-state="correct"] {
-		$answer-animation: fetz .1s both;
+	&[data-state~="correct"] {
+		$answer-animation: fetz .12s both;
 
 		-webkit-animation: $answer-animation;
 		        animation: $answer-animation;
 	}
 }
 
-.pt-swap {
+.pt-page-swap {
 	-webkit-animation: swap 0.015s ease both;
 	        animation: swap 0.015s ease both;
 }
 
 // Animations
 
-$card-intro-duration: 3ms;
-$card-text-duration: 2ms;
-$card-list-duration: 2ms;
+$card-intro-duration: 2s;
+$card-text-duration: 2s;
+$card-list-duration: 2s;
 $card-timing-function: ease-out;
 
-$card-intro-animation: cardFadeIn $card-intro-duration/2 $card-timing-function 2 alternate both;
-$card-text-animation: cardFadeIn $card-text-duration $card-timing-function $card-intro-duration both;
-$card-list-animation: cardFadeIn $card-list-duration $card-timing-function ($card-intro-duration + $card-text-duration) both;
+$card-intro-animation: fadeOut $card-intro-duration $card-timing-function both;
+$card-text-animation: fadeIn $card-text-duration $card-timing-function $card-intro-duration both;
+$card-list-animation: fadeIn $card-list-duration $card-timing-function ($card-intro-duration + $card-text-duration) both;
 
 .card--active {
 	.card__intro {
@@ -146,16 +146,26 @@ $card-list-animation: cardFadeIn $card-list-duration $card-timing-function ($car
 	}
 }
 
+.pt-page-fadeIn {
+	-webkit-animation: fadeIn 1s ease 1s both;
+	        animation: fadeIn 1s ease 1s both;
+}
+
+.pt-page-fadeOut {
+	-webkit-animation: fadeOut 1s ease both;
+	        animation: fadeOut 1s ease both;
+}
+
 // Keyframes
 
 @-webkit-keyframes fetz {
 	0%   { -webkit-transform: scale(1); }
-	50%  { -webkit-transform: scale(1.1); }
+	50%  { -webkit-transform: scale(1.05); }
 	100% { -webkit-transform: scale(1); }
 }
 @keyframes fetz {
 	0%   { transform: scale(1); }
-	50%  { transform: scale(1.1); }
+	50%  { transform: scale(1.05); }
 	100% { transform: scale(1); }
 }
 
@@ -168,12 +178,21 @@ $card-list-animation: cardFadeIn $card-list-duration $card-timing-function ($car
 	100% { opacity: 1; }
 }
 
-@-webkit-keyframes cardFadeIn {
+@-webkit-keyframes fadeIn {
 	0%   { opacity: 0; }
 	100% { opacity: 1; }
 }
-@keyframes cardFadeIn {
+@keyframes fadeIn {
 	0%   { opacity: 0; }
 	100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeOut {
+	0%   { opacity: 1; }
+	100% { opacity: 0; }
+}
+@keyframes fadeOut {
+	0%   { opacity: 1; }
+	100% { opacity: 0; }
 }
 

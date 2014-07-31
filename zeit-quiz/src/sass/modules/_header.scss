@@ -1,3 +1,5 @@
+$progress-state-transition-duration: .4s;
+
 .stage__header {
 	max-width: 320px;
 	margin: 0 auto;
@@ -10,14 +12,26 @@
 	padding: 0;
 	list-style: none;
 	overflow: hidden;
+}
 
+.dashboard {
 	li {
 		float: left;
 	}
 }
 
+.progress {
+	@include flex-box();
+
+	li {
+		@include flex(1);
+	}
+}
+
 .dashboard__item {
 	width: 25%;
+
+	@include transition(color $progress-state-transition-duration);
 
 	&[data-state="quick"] { color: $color-state-quick; }
 	&[data-state="fair"]  { color: $color-state-fair; }
@@ -42,23 +56,31 @@
 
 .progress {
 	margin: .5em 0;
+
+	[data-state="quick"]   { background-color: $color-state-quick; }
+	[data-state="fair"]    { background-color: $color-state-fair; }
+	[data-state="false"]   { background-color: $color-state-false; }
+	[data-state="slow"]    { background-color: $color-state-slow; }
+	[data-state="running"] { background-color: $color-state-running; }
 }
 
 .progress__step {
 	width: 10%;
 	height: .25em;
 	background-color: $color-state-default;
-	// border-right: 1px solid #fff;
-	@include box-shadow(inset -1px 0 1px -1px #fff);
+	border-right: 1px solid #fff;
+	// @include box-shadow(inset -1px 0 1px -1px #fff);
 	@include transition(background-color .2s);
 
 	&:last-child {
-		@include box-shadow(none);
+		border-right: 0 none;
+		// @include box-shadow(none);
 	}
+}
 
-	&[data-state="quick"]   { background-color: $color-state-quick; }
-	&[data-state="fair"]    { background-color: $color-state-fair; }
-	&[data-state="false"]   { background-color: $color-state-false; }
-	&[data-state="slow"]    { background-color: $color-state-slow; }
-	&[data-state="running"] { background-color: $color-state-running; }
+.progress__meter {
+	width: 0%;
+	height: 100%;
+	background-color: $color-state-slow;
+	@include transition(width .5s linear, background-color $progress-state-transition-duration);
 }

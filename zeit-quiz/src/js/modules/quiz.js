@@ -2,6 +2,9 @@
 define( ['jquery'], function( $ ) {
 	'use strict';
 
+	window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+	                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
 	var questions = [
 		{
 			description: 'Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag. Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.',
@@ -18,7 +21,7 @@ define( ['jquery'], function( $ ) {
 				{text: '12 Spieler pro Mannschaft', correct: false},
 				{text: 'Vierter Schiedsrichter', correct: true},
 				{text: '3 Tore auf dem Platz', correct: false},
-				{text: 'Zwölfmeter ', correct: false}
+				{text: 'Zwölfmeter', correct: false}
 			]
 		},
 		{
@@ -28,6 +31,51 @@ define( ['jquery'], function( $ ) {
 				{text: '1971', correct: false},
 				{text: '1974', correct: true},
 				{text: '1975', correct: false}
+			]
+		},
+		{
+			question: 'Das wievielte Mal gewann Deutschland 2014 die Fußball-Weltmeisterschaft?',
+			answers: [
+				{text: 'Zum 6. Mal', correct: false},
+				{text: 'Zum 5. Mal', correct: false},
+				{text: 'Zum 4. Mal', correct: true},
+				{text: 'Zum 3. Mal', correct: false}
+			]
+		},
+		{
+			question: 'Welche National-Elf erhielt während der WM 2014 mit 14 gelben Karten die meisten Verwarnungen?',
+			answers: [
+				{text: 'Brasilien', correct: true},
+				{text: 'Ecuador', correct: false},
+				{text: 'Costa Rica', correct: false},
+				{text: 'Algerien', correct: false}
+			]
+		},
+		{
+			question: 'Welche WM-Mannschaft musste vor dem Halbfinale 2014 ihr Hotel in Brasilien räumen?',
+			answers: [
+				{text: 'Argentinien', correct: false},
+				{text: 'Brasilien', correct: false},
+				{text: 'Deutschland', correct: false},
+				{text: 'Niederlande', correct: true}
+			]
+		},
+		{
+			question: 'Welcher spanische Fußballstar ist mit der Hüftschwungexpertin Shakira liiert?',
+			answers: [
+				{text: 'David Villa', correct: false},
+				{text: 'Sergio Ramos', correct: false},
+				{text: 'Gerard Pique', correct: true},
+				{text: 'Fernando Torres', correct: false}
+			]
+		},
+		{
+			question: 'In welcher deutschen TV-Show war Lena Gercke, die Freundin von Kicker Sami Khedira Jurorin?',
+			answers: [
+				{text: '"X Factor"', correct: false},
+				{text: '"The Voice of Germany"', correct: false},
+				{text: '"Popstars"', correct: false},
+				{text: '"Das Supertalent"', correct: true}
 			]
 		}
 	];
@@ -111,14 +159,23 @@ define( ['jquery'], function( $ ) {
 		outClass: 'pt-page-swap',
 		inClass: 'pt-page-swap',
 		number: $( '#js-number' ),
+		delay: 700,
 		timer:  {
 			time: 0,
+			start: null,
 			interval: null,
 			display: $( '#js-timer' )
 		},
 		progress:  {
 			speed: 'quick',
-			display: $( '#js-progress' ).children()
+			limit: {
+				'quick': 6,
+				'fair': 12,
+				'slow': Infinity
+			},
+			meter: $( '<div class="progress__meter"></div>' ),
+			display: $( '#js-progress' ),
+			items: $()
 		},
 
 		start: function( e ) {
@@ -186,16 +243,54 @@ define( ['jquery'], function( $ ) {
 			$inpage.removeClass( this.inClass );
 		},
 
+		animateProgress: function( timestamp ) {
+			var that = this,
+				seconds,
+				percent;
+
+			if ( !this.timer.interval ) {
+				return;
+			}
+
+			if (this.timer.start === null) {
+				this.timer.start = timestamp;
+				this.progress.meter.width( '0%' )
+					.appendTo( this.progress.items.eq( this.currentQuestion ) );
+			}
+
+			seconds = (timestamp - this.timer.start) / 1000;
+			percent = seconds / this.progress.limit.fair * 100;
+			percent = Math.min( percent.toFixed(4), 100 );
+
+			// requestAnimationFrame meters more precise - adjust if needed
+			if ( percent === 100 ) {
+				this.progress.speed = 'slow';
+			} else {
+				this.setProgressSpeed( seconds );
+			}
+
+			this.progress.meter.width( percent + '%' ).attr( 'data-state', this.progress.speed );
+
+			if ( this.timer.interval && percent < 100) {
+				requestAnimationFrame( function( t ) { that.animateProgress( t ); } );
+			}
+		},
+
 		startTimer: function() {
 			var that = this;
 
 			this.stopTimer();
 			this.timer.interval = setInterval( function () { that.meter(); }, 1000 );
 			this.meter();
+
+			this.timer.start = null;
+			requestAnimationFrame( function( t ) { that.animateProgress( t ); } );
 		},
 
 		stopTimer: function() {
 			clearInterval( this.timer.interval );
+			this.timer.interval = null;
+			this.progress.meter.width( '0%' );
 		},
 
 		initTimer: function() {
@@ -225,17 +320,25 @@ define( ['jquery'], function( $ ) {
 				minutes = ':' + minutes;
 			}
 
-			if ( this.timer.time < 10 ) {
-				this.progress.speed = 'quick';
-			} else if ( this.timer.time < 30 ) {
-				this.progress.speed = 'fair';
-			} else {
-				this.progress.speed = 'slow';
-			}
+			this.setProgressSpeed( this.timer.time );
 
 			this.timer.display
 				.html( hours + minutes + seconds + '”' )
 				.attr( 'data-state', this.progress.speed );
+
+			// static version
+			/*
+			if (this.timer.start === null) {
+				this.timer.start = true;
+				this.progress.meter.width( '0%' )
+					.appendTo( this.progress.items.eq( this.currentQuestion ) );
+			}
+
+			var percent = this.timer.time / this.progress.limit.fair * 100;
+			percent = Math.min( percent.toFixed(4), 100 );
+
+			this.progress.meter.width( percent + '%' ).attr( 'data-state', this.progress.speed );
+			*/
 
 			this.timer.time++;
 		},
@@ -254,17 +357,32 @@ define( ['jquery'], function( $ ) {
 			});
 		},
 
+		setProgressSpeed: function( seconds ) {
+			var speed;
+
+			for (speed in this.progress.limit) {
+				if ( this.progress.limit.hasOwnProperty( speed ) ) {
+					if ( seconds < this.progress.limit[speed] ) {
+						this.progress.speed = speed;
+						break;
+					}
+				}
+			}
+		},
+
 		setProgress: function( state ) {
-			this.progress.display.eq( this.currentQuestion ).attr( 'data-state', state );
+			this.progress.meter.detach();
+			this.progress.items.eq( this.currentQuestion ).attr( 'data-state', state );
 		},
 
 		selectAnswer: function( e ) {
+			e.preventDefault();
+
 			var that = this,
 				$selection = $( e.target ),
 				$others = $selection.siblings(),
 				others = $others.get(),
 				l = $others.length,
-				delay = 900,
 				c = 1,
 				i,
 				a,
@@ -277,7 +395,7 @@ define( ['jquery'], function( $ ) {
 					if ( progress ) {
 						that.setProgress( progress );
 					}
-				}, delay * ++c );
+				}, that.delay * ++c );
 			};
 
 			$selection.attr( 'data-state', 'selected' );
@@ -303,7 +421,7 @@ define( ['jquery'], function( $ ) {
 
 			setTimeout( function() {
 				that.nextPage( e, true );
-			}, delay * ++c );
+			}, that.delay * ++c );
 		},
 
 		setAnimation: function( animation ) {
@@ -603,6 +721,17 @@ define( ['jquery'], function( $ ) {
 			this.number.html( (this.currentQuestion + 1) + '/' + this.total );
 		},
 
+		initProgress: function() {
+			var item = this.progress.display.children().eq(0),
+				i;
+
+			for ( i = this.total; i--; ) {
+				this.progress.items = this.progress.items.add( item.clone() );
+			}
+
+			this.progress.display.html(this.progress.items);
+		},
+
 		initCards: function() {
 			var cardTemplate = $.trim( $( '#js-card-template' ).html() ),
 				answerTemplate = $.trim( $( '#js-answer-template' ).html() ),
@@ -627,8 +756,6 @@ define( ['jquery'], function( $ ) {
 			}
 
 			$( '#js-cards' ).html( cards.join('') );
-
-			this.initHeader();
 		},
 
 		format: function( string, map ) {
@@ -641,6 +768,8 @@ define( ['jquery'], function( $ ) {
 			var that = this,
 				node = $( 'main' );
 
+			this.initHeader();
+			this.initProgress();
 			this.initCards();
 
 			this.pages = node.find( '.page' );
@@ -649,9 +778,9 @@ define( ['jquery'], function( $ ) {
 			this.pages.first().addClass( 'page--current' );
 			this.cards.first().addClass( 'page--current' );
 
-			node.on( 'click', '.js-start-quiz', function( e ) { that.start( e ); } );
-			node.on( 'click', '.js-skip', function( e ) { that.nextPage( e, true ); } );
-			node.on( 'click', '.js-answer', function( e ) { that.selectAnswer( e ); } );
+			node.on( 'click touchstart', '.js-start-quiz', function( e ) { that.start( e ); } );
+			node.on( 'click touchstart', '.js-skip', function( e ) { that.nextPage( e, true ); } );
+			node.on( 'click touchstart', '.js-answer', function( e ) { that.selectAnswer( e ); } );
 
 			// on document ready
 			// $( function( e ) {

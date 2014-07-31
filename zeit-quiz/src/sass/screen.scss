@@ -1,8 +1,7 @@
-// include custom mixins
+@import "compass";
 @import "variables";
 @import "functions";
 @import "mixins";
-@import "compass";
 
 @import "normalize.css";
 
@@ -31,7 +30,7 @@ body {
 	font-size: em($base-font-size);
 
 	// attention, citizens
-	overflow: hidden;
+	// overflow: hidden;
 }
 
 .stage {

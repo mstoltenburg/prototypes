@@ -110,52 +110,41 @@
 	}
 
 	&[data-state~="correct"] {
-		$answer-animation: fetz .12s both;
-
-		-webkit-animation: $answer-animation;
-		        animation: $answer-animation;
+		@include animation(fetz .12s both);
 	}
 }
 
 .pt-page-swap {
-	-webkit-animation: swap 0.015s ease both;
-	        animation: swap 0.015s ease both;
+	@include animation(swap 0.015s ease both);
 }
 
 // Animations
 
-$card-intro-duration: 2s;
-$card-text-duration: 2s;
-$card-list-duration: 2s;
+$page-fade-duration: 0.7s;
+$card-intro-duration: 0.7s;
+$card-intro-delay: 0.5s;
+$card-text-duration: 0.7s;
+$card-list-duration: 0.7s;
 $card-timing-function: ease-out;
-
-$card-intro-animation: fadeOut $card-intro-duration $card-timing-function both;
-$card-text-animation: fadeIn $card-text-duration $card-timing-function $card-intro-duration both;
-$card-list-animation: fadeIn $card-list-duration $card-timing-function ($card-intro-duration + $card-text-duration) both;
 
 .card--active {
 	.card__intro {
-		-webkit-animation: $card-intro-animation;
-		        animation: $card-intro-animation;
+		@include animation(fadeOut $card-intro-duration $card-timing-function $card-intro-delay both);
 	}
 	.question {
-		-webkit-animation: $card-text-animation;
-		        animation: $card-text-animation;
+		@include animation(fadeIn $card-text-duration $card-timing-function $card-intro-delay+$card-intro-duration both);
 	}
 	.answers {
-		-webkit-animation: $card-list-animation;
-		        animation: $card-list-animation;
+		@include animation(fadeIn $card-list-duration $card-timing-function $card-intro-delay+$card-intro-duration+$card-text-duration both);
 	}
 }
 
 .pt-page-fadeIn {
-	-webkit-animation: fadeIn 1s ease 1s both;
-	        animation: fadeIn 1s ease 1s both;
+	@include animation(fadeIn $page-fade-duration ease $page-fade-duration both);
 }
 
 .pt-page-fadeOut {
-	-webkit-animation: fadeOut 1s ease both;
-	        animation: fadeOut 1s ease both;
+	@include animation(fadeOut $page-fade-duration ease both);
 }
 
 // Keyframes

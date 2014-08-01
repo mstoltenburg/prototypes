@@ -36,12 +36,13 @@
 }
 
 /**
- * Compute screen min-width for max-font-size
+ * Compute breakoint (screen min-width) for max-font-size
  * @function  max-font-screen-width
  * @param     $min-font-size {Number} the minimum font size in pixel
  * @param     $max-font-size {Number} the maximum font size in pixel
  * @return    {Number} max screen width in em
  */
+
 @function max-font-screen-width($min-font-size, $max-font-size) {
 	$max-width: $max-font-size * (100vw / vw($min-font-size));
 	@return em($max-width);

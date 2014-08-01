@@ -82,6 +82,12 @@
 	                    order: $value; /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
+/**
+ * Create font-size range
+ * @param     $min {Number} the minimum font size in pixel
+ * @param     $max {Number} the maximum font size in pixel
+ */
+
 @mixin font-size-range($min, $max) {
 	$breakpoint: max-font-screen-width($min, $max);
 

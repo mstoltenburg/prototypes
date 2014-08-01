@@ -1,12 +1,35 @@
+/**
+ * Get font-size in point size (em)
+ * @function  em
+ * @param     $font-size {Number} font size in pixel
+ * @param     $$contex   {Number} base font size in pixel
+ * @return    {Number} font-size in em
+ */
+
 @function em($target, $context: $base-font-size) {
 	@if $target == 0 { @return 0 }
 	@return $target / $context + 0em;
 }
 
-@function vw($font-size) {
-	$percent: $font-size / 320px;
-	@return $percent * 100vw;
+/**
+ * Get font-size in viewport width (vw)
+ * @function  vw
+ * @param     $font-size		{Number} font size in pixel
+ * @param     $viewport-width	{Number} viewport width in pixel
+ * @return    {Number} font-size in vw
+ */
+
+@function vw($font-size, $viewport-width: $min-screen-width) {
+	$percent: $font-size / $viewport-width * 100;
+	@return $percent * 1vw;
 }
+
+/**
+ * Strip units
+ * @function  strip-units
+ * @param     $number {Number} value having unit
+ * @return    {Number} unitless value
+ */
 
 @function strip-units($number) {
 	@return $number / ($number * 0 + 1);
@@ -20,7 +43,6 @@
  * @return    {Number} max screen width in em
  */
 @function max-font-screen-width($min-font-size, $max-font-size) {
-	// $rel-width: vw($min-font-size);
 	$max-width: $max-font-size * (100vw / vw($min-font-size));
 	@return em($max-width);
 }

@@ -86,7 +86,12 @@
 	$breakpoint: max-font-screen-width($min, $max);
 
 	font-size: em($min);
-	font-size: vw($min);
+
+	@media screen and (min-width: em($min-screen-width)) {
+		& {
+			font-size: vw($min);
+		}
+	}
 
 	@media screen and (min-width: $breakpoint) {
 		& {

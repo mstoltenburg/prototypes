@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Font size range</title>
+	<link href="css/prism-okaidia.css" rel="stylesheet" type="text/css">
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="css/font-size-range.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<main class="font-size-range">
+
+		<div class="full">
+			<pre><code class="language-scss">
+.headline {
+	font-size: 1em;
+}
+
+@media screen and (min-width: 20em) {
+	.headline {
+		font-size: 5vw;
+	}
+}
+
+@media screen and (min-width: 30em) {
+	.headline {
+		font-size: 1.5em;
+	}
+}
+			</code></pre>
+			<pre><code class="language-markup">
+&lt;article&gt;
+	&lt;h1 class="headline"&gt;Neque porro quisquam est&lt;/h1&gt;
+	&lt;p&gt;
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		Quaerat ab temporibus dolorem sequi, nam maiores, inventore!
+	&lt;/p&gt;
+&lt;/article&gt;
+			</code></pre>
+		</div>
+
+
+		<article>
+			<h1 class="headline">Neque porro quisquam est</h1>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				Quaerat ab temporibus dolorem sequi, nam maiores, inventore!
+			</p>
+		</article>
+
+
+
+	</main>
+
+	<script src="js/prism.js"></script>
+</body>
+
+</html>

@@ -28,6 +28,10 @@ a {
 p {
   margin: 0 0 1.4em 0; }
 
+pre[class*="language-"] {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 /* FONT FACE */
 .ff {
   margin: 0 -1em;

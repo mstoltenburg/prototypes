@@ -12,49 +12,124 @@
 
 	<main class="font-size-range">
 
-		<div class="full">
-			<pre><code class="language-scss">
-h1 {
-	@include font-size-range(24px, 36px);
-}
+		<article>
+			<h1>Nike porro quisquam est</h1>
+			<p class="scale">
+				Lorem ipsum dolor sit amet, consectetur
+				adipisicing elit. Quaerat ab temporibus
+				dolorem sequi, nam maiores, inventore!
+			</p>
+		</article>
+
+		<div class="code">
+			<pre><code class="language-css">
+/* CSS */
 
 h1 {
-	font-size: 1.5em;
+	font-size: 1.5em; /* 16px * 1.5 = 24px */
 }
 
-@media screen and (min-width: 20em) {
+@media screen and (min-width: 20em) { /* 16px * 20 = 320px */
 	h1 {
-		font-size: 7.5vw;
+		font-size: 7.5vw; /* 24px / 320px = 0.075 = 7.5% */
 	}
 }
 
-@media screen and (min-width: 30em) {
+@media screen and (min-width: 40em) { /* 16px * 40 = 640px, 640px * 0.075 = 48px */
 	h1 {
-		font-size: 2.25em;
+		font-size: 3em; /* 16px * 3 = 48px */
 	}
 }
 			</code></pre>
+		</div>
+
+		<div class="code">
 			<pre><code class="language-markup">
+&lt;!-- HTML --&gt;
+
 &lt;article&gt;
 	&lt;h1&gt;Neque porro quisquam est&lt;/h1&gt;
 	&lt;p&gt;
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-		Quaerat ab temporibus dolorem sequi, nam maiores, inventore!
+		Lorem ipsum dolor sit amet, consectetur
+		adipisicing elit. Quaerat ab temporibus
+		dolorem sequi, nam maiores, inventore!
 	&lt;/p&gt;
 &lt;/article&gt;
 			</code></pre>
 		</div>
 
+		<div class="code">
+			<pre><code class="language-scss">
+/* SCSS */
 
-		<article>
-			<h1>Neque porro quisquam est</h1>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				Quaerat ab temporibus dolorem sequi, nam maiores, inventore!
-			</p>
-		</article>
+h1 {
+	@include font-size-range(24px, 48px);
+}
 
+// Variables
 
+$base-font-size: 16px;
+$min-screen-width: 320px;
+
+// Utility functions
+
+/**
+ * Get font-size in point size (em)
+ * @param     $font-size {Number} font size in pixel
+ * @param     $$contex   {Number} base font size in pixel
+ * @return    {Number} font-size in em
+ */
+
+@function em($target, $context: $base-font-size) {
+	@if $target == 0 { @return 0 }
+	@return $target / $context + 0em;
+}
+
+/**
+ * Get font-size in viewport width (vw)
+ * @param     $font-size		{Number} font size in pixel
+ * @param     $viewport-width	{Number} viewport width in pixel
+ * @return    {Number} font-size in vw
+ */
+
+@function vw($font-size, $viewport-width: $min-screen-width) {
+	$percent: $font-size / $viewport-width * 100;
+	@return $percent * 1vw;
+}
+
+/**
+ * Compute screen min-width for max-font-size
+ * @param     $min-font-size {Number} the minimum font size in pixel
+ * @param     $max-font-size {Number} the maximum font size in pixel
+ * @return    {Number} max screen width in em
+ */
+
+@function max-font-screen-width($min-font-size, $max-font-size) {
+	$max-width: $max-font-size * (100vw / vw($min-font-size));
+	@return em($max-width);
+}
+
+// Mixins
+
+@mixin font-size-range($min, $max) {
+	$breakpoint: max-font-screen-width($min, $max);
+
+	font-size: em($min);
+
+	@media screen and (min-width: em($min-screen-width)) {
+		&amp; {
+			font-size: vw($min);
+		}
+	}
+
+	@media screen and (min-width: $breakpoint) {
+		&amp; {
+			font-size: em($max);
+		}
+	}
+}
+			</code></pre>
+		</div>
 
 	</main>
 

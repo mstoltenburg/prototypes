@@ -36,10 +36,10 @@ define( ['jquery'], function( $ ) {
 		{
 			question: 'Das wievielte Mal gewann Deutschland 2014 die Fußball-Weltmeisterschaft?',
 			answers: [
-				{text: 'Zum 6. Mal', correct: false},
-				{text: 'Zum 5. Mal', correct: false},
-				{text: 'Zum 4. Mal', correct: true},
-				{text: 'Zum 3. Mal', correct: false}
+				{text: 'Zum sechsten Mal', correct: false},
+				{text: 'Zum fünften Mal', correct: false},
+				{text: 'Zum vierten Mal', correct: true},
+				{text: 'Zum dritten Mal', correct: false}
 			]
 		},
 		{

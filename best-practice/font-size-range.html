@@ -14,25 +14,29 @@
 
 		<div class="full">
 			<pre><code class="language-scss">
-.headline {
-	font-size: 1em;
+h1 {
+	@include font-size-range(24px, 36px);
+}
+
+h1 {
+	font-size: 1.5em;
 }
 
 @media screen and (min-width: 20em) {
-	.headline {
-		font-size: 5vw;
+	h1 {
+		font-size: 7.5vw;
 	}
 }
 
 @media screen and (min-width: 30em) {
-	.headline {
-		font-size: 1.5em;
+	h1 {
+		font-size: 2.25em;
 	}
 }
 			</code></pre>
 			<pre><code class="language-markup">
 &lt;article&gt;
-	&lt;h1 class="headline"&gt;Neque porro quisquam est&lt;/h1&gt;
+	&lt;h1&gt;Neque porro quisquam est&lt;/h1&gt;
 	&lt;p&gt;
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 		Quaerat ab temporibus dolorem sequi, nam maiores, inventore!
@@ -43,7 +47,7 @@
 
 
 		<article>
-			<h1 class="headline">Neque porro quisquam est</h1>
+			<h1>Neque porro quisquam est</h1>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 				Quaerat ab temporibus dolorem sequi, nam maiores, inventore!

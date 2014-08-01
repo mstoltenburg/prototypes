@@ -98,10 +98,10 @@ $min-screen-width: 320px;
 }
 
 /**
- * Compute screen min-width for max-font-size
+ * Compute breakpoint (screen min-width) for max-font-size
  * @param     $min-font-size {Number} the minimum font size in pixel
  * @param     $max-font-size {Number} the maximum font size in pixel
- * @return    {Number} max screen width in em
+ * @return    {Number} screen min-width in em
  */
 
 @function max-font-screen-width($min-font-size, $max-font-size) {
@@ -110,6 +110,12 @@ $min-screen-width: 320px;
 }
 
 // Mixins
+
+/**
+ * Create font-size range
+ * @param     $min {Number} the minimum font size in pixel
+ * @param     $max {Number} the maximum font size in pixel
+ */
 
 @mixin font-size-range($min, $max) {
 	$breakpoint: max-font-screen-width($min, $max);

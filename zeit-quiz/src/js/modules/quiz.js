@@ -102,6 +102,9 @@ define( ['jquery'], function( $ ) {
 		});
 	};
 
+	/**
+	 * Use Fisher–Yates Shuffle to randomize the order of answers
+	 */
 	var shuffleArray = function( a ) {
 		var m = a.length, t, i;
 

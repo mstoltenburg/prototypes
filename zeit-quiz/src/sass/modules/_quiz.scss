@@ -45,7 +45,7 @@
 	@include font-size-range(16px, 24px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
-	padding: 0 em(8px);
+	padding: em(8px);
 }
 
 .answers {

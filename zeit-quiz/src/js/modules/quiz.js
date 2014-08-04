@@ -161,6 +161,7 @@ define( ['jquery'], function( $ ) {
 		endNextPage: false,
 		outClass: 'pt-page-swap',
 		inClass: 'pt-page-swap',
+		lock: $( '#js-lock' ),
 		number: $( '#js-number' ),
 		delay: 700,
 		timer:  {
@@ -351,6 +352,7 @@ define( ['jquery'], function( $ ) {
 				$card = this.cards.eq( this.currentQuestion );
 
 			this.initHeader();
+			this.lock.hide();
 
 			$card.addClass( 'card--active' ).on( animEndEventName, function( e ) {
 				if ( e.target.className === 'question') {
@@ -401,6 +403,7 @@ define( ['jquery'], function( $ ) {
 				}, that.delay * ++c );
 			};
 
+			this.lock.show();
 			$selection.attr( 'data-state', 'selected' );
 			this.stopTimer();
 

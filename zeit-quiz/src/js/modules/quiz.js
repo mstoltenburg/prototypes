@@ -357,14 +357,6 @@ define( ['jquery'], function( $ ) {
 			if ( this.currentQuestion >= this.total ) {
 				this.showReport();
 				$card = this.cards.last();
-				// $card.addClass( 'card--active' );
-
-				setTimeout(function(){
-					$card.addClass( 'card--active' );
-				}, 1);
-
-
-				return false;
 			}
 
 			$card.addClass( 'card--active' ).on( animEndEventName, function( e ) {

@@ -26,12 +26,8 @@ $color-answer-default: $gigas;
 $color-answer-selected: $wild-strawberry;
 
 // speed up animation
-$hurry-up: false;
-
-@if $hurry-up {
-	$page-fade-duration:  5ms;
-	$card-intro-duration: 5ms;
-	$card-intro-delay:    5ms;
-	$card-text-duration:  5ms;
-	$card-list-duration:  5ms;
-}
+// $page-fade-duration:  5ms;
+// $card-intro-duration: 5ms;
+// $card-intro-delay:    5ms;
+// $card-text-duration:  5ms;
+// $card-list-duration:  5ms;

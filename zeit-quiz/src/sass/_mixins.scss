@@ -58,6 +58,13 @@
 	        animation: $value;
 }
 
+@mixin animation-delay($value) {
+	-webkit-animation-delay: $value;
+	   -moz-animation-delay: $value;
+	     -o-animation-delay: $value;
+	        animation-delay: $value;
+}
+
 @mixin flex-box() {
 	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6 */
 	display: -moz-box;     /* OLD - Firefox 19- (buggy but mostly works) */

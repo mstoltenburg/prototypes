@@ -163,7 +163,7 @@ define( ['jquery'], function( $ ) {
 		outClass: 'pt-page-swap',
 		inClass: 'pt-page-swap',
 		number: $( '#js-number' ),
-		delay: 700,
+		delay: 600,
 		timer:  {
 			time: 0,
 			start: null,
@@ -177,7 +177,6 @@ define( ['jquery'], function( $ ) {
 				'fair': 12,
 				'slow': Infinity
 			},
-			states: [],
 			meter: $( '<div class="progress__meter"></div>' ),
 			display: $( '#js-progress' ),
 			items: $()
@@ -376,6 +375,19 @@ define( ['jquery'], function( $ ) {
 			});
 		},
 
+		getPoints: function( state ) {
+			switch ( state ) {
+				case 'quick':
+					return 10;
+				case 'fair':
+					return 5;
+				case 'slow':
+					return 2;
+				default:
+					return 0;
+			}
+		},
+
 		showReport: function() {
 			var stripes = $( '#js-stripes' ),
 				points = $( '#js-points' ),
@@ -386,11 +398,11 @@ define( ['jquery'], function( $ ) {
 				state,
 				i;
 
-			for ( i = this.progress.states.length; i--; ) {
-				state = this.progress.states[ i ];
+			for ( i = this.total; i--; ) {
+				state = this.progress.items.eq( i ).attr( 'data-state' ) || 'default';
 				stripe.children().eq(0).attr( 'data-state', state );
 				s.unshift( stripe.get(0).outerHTML );
-				p.unshift( this.format( point, { points: 5 } ) );
+				p.unshift( this.format( point, { points: this.getPoints( state ) } ) );
 			}
 
 			stripes.html( s.join('') );
@@ -429,11 +441,6 @@ define( ['jquery'], function( $ ) {
 				w;
 
 			var setState = function( a, state, progress ) {
-				// save without timeout for reporting
-				if ( progress ) {
-					that.progress.states.push( progress );
-				}
-
 				setTimeout( function() {
 					a.setAttribute( 'data-state', state );
 
@@ -478,7 +485,7 @@ define( ['jquery'], function( $ ) {
 		setAnimation: function( animation ) {
 			var outClass, inClass;
 
-			switch( animation ) {
+			switch ( animation ) {
 
 				case 0:
 					outClass = 'pt-page-swap';
@@ -773,8 +780,10 @@ define( ['jquery'], function( $ ) {
 		},
 
 		initHeader: function() {
-			this.initTimer();
-			this.number.html( (this.currentQuestion + 1) + '/' + this.total );
+			if (this.currentQuestion < this.total) {
+				this.initTimer();
+				this.number.html( (this.currentQuestion + 1) + '/' + this.total );
+			}
 		},
 
 		initProgress: function() {

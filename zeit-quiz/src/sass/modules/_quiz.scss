@@ -1,6 +1,6 @@
 .arena {
 	max-width: em(576px); // + 2*padding? = + 16px?
-	height: 90%;
+	height: 92%;
 	margin: 0 auto;
 	// height: calc(100% - 42px);
 	// background-color: #fcc;
@@ -33,7 +33,7 @@
 
 .question {
 	display: table-row;
-	height: 50%;
+	height: 80%;
 	opacity: 0;
 }
 
@@ -50,7 +50,7 @@
 
 .answers {
 	display: table-row;
-	height: 50%;
+	height: 20%;
 	opacity: 0;
 }
 
@@ -68,7 +68,7 @@
 	background-color: $color-answer-default;
 	margin: 1px auto 0;
 	padding: em(12px) em(8px);
-	max-width: 320px;
+	max-width: $card-width;
 	cursor: pointer;
 	@include transition(background-color .5s);
 
@@ -120,12 +120,12 @@
 
 // Animations
 
-$page-fade-duration: 0.7s;
-$card-intro-duration: 0.7s;
-$card-intro-delay: 0.5s;
-$card-text-duration: 0.7s;
-$card-list-duration: 0.7s;
-$card-timing-function: ease-out;
+$page-fade-duration: 0.7s !default;
+$card-intro-duration: 0.7s !default;
+$card-intro-delay: 0.5s !default;
+$card-text-duration: 0.7s !default;
+$card-list-duration: 0.7s !default;
+$card-timing-function: ease-out !default;
 
 .card--active {
 	.card__intro {

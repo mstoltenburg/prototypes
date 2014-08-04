@@ -1,7 +1,7 @@
 $progress-state-transition-duration: .4s;
 
 .stage__header {
-	max-width: 320px;
+	max-width: $card-width;
 	margin: 0 auto;
 }
 
@@ -17,14 +17,6 @@ $progress-state-transition-duration: .4s;
 .dashboard {
 	li {
 		float: left;
-	}
-}
-
-.progress {
-	@include flex-box();
-
-	li {
-		@include flex(1);
 	}
 }
 
@@ -55,8 +47,11 @@ $progress-state-transition-duration: .4s;
 }
 
 .progress {
-	margin: .5em 0;
+	@include flex-box();
 
+	margin: .5em 0 0;
+
+	[data-state="default"] { background-color: $color-state-default; }
 	[data-state="quick"]   { background-color: $color-state-quick; }
 	[data-state="fair"]    { background-color: $color-state-fair; }
 	[data-state="false"]   { background-color: $color-state-false; }
@@ -65,6 +60,8 @@ $progress-state-transition-duration: .4s;
 }
 
 .progress__step {
+	@include flex(1);
+
 	width: 10%;
 	height: .25em;
 	background-color: $color-state-default;

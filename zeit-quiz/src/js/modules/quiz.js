@@ -80,13 +80,6 @@ define( ['jquery'], function( $ ) {
 		}
 	];
 
-	var animEndEventNames = {
-		'WebkitAnimation': 'webkitAnimationEnd',
-		'OAnimation': 'oAnimationEnd',
-		'msAnimation': 'MSAnimationEnd',
-		'animation': 'animationend'
-	};
-
 	var entityMap = {
 		'&': '&amp;',
 		'<': '&lt;',
@@ -123,11 +116,19 @@ define( ['jquery'], function( $ ) {
 		return a;
 	};
 
+	var animEndEventNames = {
+		'MozAnimation' : 'animationend', // verify for FF < 16
+		'WebkitAnimation': 'webkitAnimationEnd',
+		'OAnimation': 'oAnimationEnd',
+		'msAnimation': 'MSAnimationEnd',
+		'animation': 'animationend'
+	};
+
 	var getTransitionPrefix = function() {
 		var b = document.body || document.documentElement,
 			s = b.style,
 			p = 'animation',
-			v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'].reverse(),
+			v = ['Moz', 'Webkit', 'O', 'ms'].reverse(),
 			i;
 
 		if ( typeof s[p] === 'string' ) {
@@ -152,8 +153,8 @@ define( ['jquery'], function( $ ) {
 	var Quiz = {
 		currentPage: 0,
 		currentQuestion: 0,
-		pages: [],
-		cards: [],
+		pages: null,
+		cards: null,
 		questions: questions,
 		total: questions.length,
 		isAnimating: false,
@@ -161,7 +162,6 @@ define( ['jquery'], function( $ ) {
 		endNextPage: false,
 		outClass: 'pt-page-swap',
 		inClass: 'pt-page-swap',
-		lock: $( '#js-lock' ),
 		number: $( '#js-number' ),
 		delay: 700,
 		timer:  {
@@ -177,9 +177,14 @@ define( ['jquery'], function( $ ) {
 				'fair': 12,
 				'slow': Infinity
 			},
+			states: [],
 			meter: $( '<div class="progress__meter"></div>' ),
 			display: $( '#js-progress' ),
 			items: $()
+		},
+		lock: {
+			screen: $( '#js-lock' ),
+			isActive: false
 		},
 
 		start: function( e ) {
@@ -200,10 +205,6 @@ define( ['jquery'], function( $ ) {
 				$nextPage;
 
 			if ( isCard ) {
-				if ( this.currentQuestion === this.total - 1 ) {
-					return false;
-				}
-
 				$thisPage = this.cards.eq( this.currentQuestion++ );
 				$nextPage = this.cards.eq( this.currentQuestion ).addClass( 'page--current' );
 				this.setAnimation( 69 ); // 7
@@ -352,7 +353,20 @@ define( ['jquery'], function( $ ) {
 				$card = this.cards.eq( this.currentQuestion );
 
 			this.initHeader();
-			this.lock.hide();
+			this.showLock( false );
+
+			if ( this.currentQuestion >= this.total ) {
+				this.showReport();
+				$card = this.cards.last();
+				// $card.addClass( 'card--active' );
+
+				setTimeout(function(){
+					$card.addClass( 'card--active' );
+				}, 1);
+
+
+				return false;
+			}
 
 			$card.addClass( 'card--active' ).on( animEndEventName, function( e ) {
 				if ( e.target.className === 'question') {
@@ -360,6 +374,27 @@ define( ['jquery'], function( $ ) {
 					that.startTimer();
 				}
 			});
+		},
+
+		showReport: function() {
+			var stripes = $( '#js-stripes' ),
+				points = $( '#js-points' ),
+				stripe = stripes.children().eq(0),
+				point = $.trim( points.html() ),
+				s = [],
+				p = [],
+				state,
+				i;
+
+			for ( i = this.progress.states.length; i--; ) {
+				state = this.progress.states[ i ];
+				stripe.children().eq(0).attr( 'data-state', state );
+				s.unshift( stripe.get(0).outerHTML );
+				p.unshift( this.format( point, { points: 5 } ) );
+			}
+
+			stripes.html( s.join('') );
+			points.html( p.join('') );
 		},
 
 		setProgressSpeed: function( seconds ) {
@@ -394,6 +429,11 @@ define( ['jquery'], function( $ ) {
 				w;
 
 			var setState = function( a, state, progress ) {
+				// save without timeout for reporting
+				if ( progress ) {
+					that.progress.states.push( progress );
+				}
+
 				setTimeout( function() {
 					a.setAttribute( 'data-state', state );
 
@@ -403,7 +443,7 @@ define( ['jquery'], function( $ ) {
 				}, that.delay * ++c );
 			};
 
-			this.lock.show();
+			this.showLock( true );
 			$selection.attr( 'data-state', 'selected' );
 			this.stopTimer();
 
@@ -430,6 +470,11 @@ define( ['jquery'], function( $ ) {
 			}, that.delay * ++c );
 		},
 
+		/**
+		 * Set animation classes for page transition
+		 * @param {number} animation - numerical key
+		 * @see http://tympanus.net/Development/PageTransitions/
+		 */
 		setAnimation: function( animation ) {
 			var outClass, inClass;
 
@@ -722,6 +767,11 @@ define( ['jquery'], function( $ ) {
 			this.inClass = inClass;
 		},
 
+		showLock: function( show ) {
+			this.lock.screen.toggle( show );
+			this.lock.isActive = show;
+		},
+
 		initHeader: function() {
 			this.initTimer();
 			this.number.html( (this.currentQuestion + 1) + '/' + this.total );
@@ -741,6 +791,7 @@ define( ['jquery'], function( $ ) {
 		initCards: function() {
 			var cardTemplate = $.trim( $( '#js-card-template' ).html() ),
 				answerTemplate = $.trim( $( '#js-answer-template' ).html() ),
+				reportTemplate = $.trim( $( '#js-report-template' ).html() ),
 				cards = [],
 				answers = [],
 				q,
@@ -749,7 +800,7 @@ define( ['jquery'], function( $ ) {
 
 			for ( i = 0; i < this.total; i++ ) {
 				q = this.questions[i];
-				q.no = i + 1;
+				q.intro = (this.total === i + 1) ? 'Letzte Frage!' : 'Frage ' + (i + 1);
 				answers = [];
 
 				shuffleArray(q.answers);
@@ -760,6 +811,8 @@ define( ['jquery'], function( $ ) {
 
 				cards.push( this.format( cardTemplate.replace( /\{answers\}/, answers.join('') ), q ) );
 			}
+
+			cards.push( reportTemplate );
 
 			$( '#js-cards' ).html( cards.join('') );
 		},

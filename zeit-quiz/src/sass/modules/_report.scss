@@ -1,0 +1,80 @@
+.stripes,
+.points {
+	width: 100%;
+	max-width: $card-width;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+
+	@include flex-box();
+}
+
+.stripes {
+	overflow: hidden;
+	height: 94%;
+
+	[data-state="default"] { background-color: $color-state-default; }
+	[data-state="quick"]   { background-color: $color-state-quick; }
+	[data-state="fair"]    { background-color: $color-state-fair; }
+	[data-state="false"]   { background-color: $color-state-false; }
+	[data-state="slow"]    { background-color: $color-state-slow; }
+	[data-state="running"] { background-color: $color-state-running; }
+}
+
+.points {
+}
+
+.stripe,
+.point {
+	@include flex(1);
+	text-align: center;
+	line-height: 2;
+}
+
+.stripe {
+	position: relative;
+	border-right: 1px solid #fff;
+
+	&:last-child {
+		border-right: 0 none;
+	}
+}
+
+.point {
+	opacity: 0;
+	@include transition(opacity .1s);
+}
+
+.color-strip {
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	width: 100%;
+	height: 200%;
+	@include transition(height 1s, bottom .5s);
+}
+
+.card--active {
+	.point {
+		opacity: 1;
+	}
+
+	.color-strip {
+		height: 5%;
+		bottom: 0%;
+	}
+}
+
+$stripes-transition-delay: .1s;
+
+@for $i from 1 through 10 {
+	.card--active {
+		.point:nth-of-type(10n+#{$i}) {
+			@include transition-delay($i * $stripes-transition-delay + .2s);
+		}
+
+		.stripe:nth-of-type(10n+#{$i}) .color-strip {
+			@include transition-delay($i * $stripes-transition-delay);
+		}
+	}
+}

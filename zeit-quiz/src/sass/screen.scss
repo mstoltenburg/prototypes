@@ -10,6 +10,7 @@
 @import "modules/cover";
 @import "modules/header";
 @import "modules/quiz";
+@import "modules/report";
 
 *,
 *:before,
@@ -36,8 +37,9 @@ body {
 .stage {
 	width: 100%;
 	height: 100%;
-	max-width: 800px;
-	max-height: 600px;
+	min-width: em($min-screen-width);
+	max-width: em(800px);
+	max-height: em(600px);
 	margin: auto;
 	position: absolute;
 	top: 0;

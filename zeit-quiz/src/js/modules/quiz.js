@@ -170,6 +170,10 @@ define( ['jquery'], function( $ ) {
 			interval: null,
 			display: $( '#js-timer' )
 		},
+		score: {
+			points: 0,
+			display: $( '#js-score' )
+		},
 		progress:  {
 			speed: 'quick',
 			limit: {
@@ -206,12 +210,12 @@ define( ['jquery'], function( $ ) {
 			if ( isCard ) {
 				$thisPage = this.cards.eq( this.currentQuestion++ );
 				$nextPage = this.cards.eq( this.currentQuestion ).addClass( 'page--current' );
-				this.setAnimation( 69 ); // 7
+				this.setAnimation( 69 ); // 69 7
 				this.stopTimer();
 			} else {
 				$thisPage = this.pages.eq( this.currentPage++ );
 				$nextPage = this.pages.eq( this.currentPage ).addClass( 'page--current' );
-				this.setAnimation( 67 ); // 67 60 34 64 17
+				this.setAnimation( 69 ); // 67 60 34 64 17
 			}
 
 			$thisPage.addClass( this.outClass ).on( animEndEventName, function() {
@@ -417,6 +421,8 @@ define( ['jquery'], function( $ ) {
 		setProgress: function( state ) {
 			this.progress.meter.detach();
 			this.progress.items.eq( this.currentQuestion ).attr( 'data-state', state );
+			this.score.points += this.getPoints( state );
+			this.score.display.html( this.score.points );
 		},
 
 		selectAnswer: function( e ) {
@@ -777,7 +783,7 @@ define( ['jquery'], function( $ ) {
 				this.number.html( (this.currentQuestion + 1) + '/' + this.total );
 			} else {
 				this.timer.display.html( '<a href="#" class="dashboard__love"></a>' );
-				$( '#js-link' ).html( '<a href="#" class="dashboard__share"></a>' );
+				this.score.display.html( '<a href="#" class="dashboard__share"></a>' );
 			}
 		},
 
@@ -789,7 +795,7 @@ define( ['jquery'], function( $ ) {
 				this.progress.items = this.progress.items.add( item.clone() );
 			}
 
-			this.progress.display.html(this.progress.items);
+			this.progress.display.html( this.progress.items );
 		},
 
 		initCards: function() {

@@ -20,7 +20,7 @@
 
 // needed for iOS font-size bug
 .card__text {
-	@include font-size-range(16px, 24px);
+	@include font-size-range(20px, 28px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
 }

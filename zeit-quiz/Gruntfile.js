@@ -84,7 +84,7 @@ module.exports = function( grunt ) {
 				options: {
 					debugInfo: false,
 					environment: 'production',
-					outputStyle: 'compressed'
+					outputStyle: 'compressed' // nested (default), compact, compressed, or expanded.
 				}
 			}
 		},

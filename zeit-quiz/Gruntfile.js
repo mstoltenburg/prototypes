@@ -60,6 +60,12 @@ module.exports = function( grunt ) {
 				src: 'fonts/**',
 				dest: 'build/'
 			},
+			images: {
+				expand: true,
+				cwd: 'src/sass/',
+				src: 'icons/*',
+				dest: 'build/css/'
+			},
 			html: {
 				expand: true,
 				cwd: 'src/',

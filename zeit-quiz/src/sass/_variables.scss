@@ -13,7 +13,7 @@ $mercury: #e6e6e6;			// grey
 $black: #000;				// black
 $white: #fff;				// white
 
-// State colors
+// state colors
 $color-state-default: $mercury;
 $color-state-quick: $picton-blue;
 $color-state-fair: $wild-strawberry;
@@ -24,6 +24,10 @@ $color-state-running: $white;
 // answer colors
 $color-answer-default: $gigas;
 $color-answer-selected: $wild-strawberry;
+
+// button colors
+$background-button-default: $black;
+$background-button-hover: $wild-strawberry;
 
 // speed up animation
 // $page-fade-duration:  5ms;

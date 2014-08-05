@@ -20,7 +20,6 @@ $claim-max-font-size: 28px;
 	text-align: center;
 	padding: 0 em(20px, $claim-min-font-size);
 
-	// background-color: #fcc;
 	width: 100%;
 	max-width: 400px;
 	position: absolute;
@@ -41,7 +40,15 @@ $claim-max-font-size: 28px;
 	letter-spacing: 2px;
 	padding: .75em 1em;
 	color: #fff;
-	background-color: #000;
+	background-color: $background-button-default;
 	text-transform: uppercase;
 	cursor: pointer;
+	@include transition(background-color .25s);
+	// @include box-shadow(inset 0 0 3px $background-button-default);
+	// @include text-shadow(0 0 3px $background-button-default);
+
+	&:hover,
+	&:focus {
+		background-color: $background-button-hover;
+	}
 }

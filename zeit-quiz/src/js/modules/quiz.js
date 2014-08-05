@@ -775,6 +775,9 @@ define( ['jquery'], function( $ ) {
 			if (this.currentQuestion < this.total) {
 				this.initTimer();
 				this.number.html( (this.currentQuestion + 1) + '/' + this.total );
+			} else {
+				this.timer.display.html( '<a href="#" class="dashboard__love"></a>' );
+				$( '#js-link' ).html( '<a href="#" class="dashboard__share"></a>' );
 			}
 		},
 

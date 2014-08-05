@@ -1,4 +1,5 @@
 $progress-state-transition-duration: .4s;
+$dashboard-height: em(27px);
 
 .stage__header {
 	max-width: $card-width;
@@ -15,6 +16,8 @@ $progress-state-transition-duration: .4s;
 }
 
 .dashboard {
+	line-height: $dashboard-height;
+
 	li {
 		float: left;
 	}
@@ -43,6 +46,30 @@ $progress-state-transition-duration: .4s;
 	a {
 		color: inherit;
 		text-decoration: none;
+	}
+}
+
+.dashboard__love {
+	width: em(27px);
+	height: em(27px);
+	background: url("icons/love.png") no-repeat 0% 0%;
+	float: left;
+}
+
+.dashboard__share {
+	width: em(27px);
+	height: em(21px);
+	margin-top: em(3px);
+	background: url("icons/share.png") no-repeat 0% 0%;
+	float: right;
+}
+
+.dashboard__love,
+.dashboard__share {
+	@include background-size(cover);
+
+	&:hover {
+		opacity: .5;
 	}
 }
 

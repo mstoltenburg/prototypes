@@ -90,7 +90,7 @@ module.exports = function( grunt ) {
 				options: {
 					debugInfo: false,
 					environment: 'production',
-					outputStyle: 'compressed' // nested (default), compact, compressed, or expanded.
+					outputStyle: 'compact' // nested (default), compact, compressed, or expanded.
 				}
 			}
 		},

@@ -3,6 +3,7 @@ module.exports = function( grunt ) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON( 'package.json' ),
+
 		bower: {
 			target: {
 				rjsConfig: 'src/js/main.js'
@@ -11,6 +12,7 @@ module.exports = function( grunt ) {
 				exclude: ['modernizr', 'requirejs']
 			}
 		},
+
 		requirejs: {
 			options: {
 				keepBuildDir: true,
@@ -36,6 +38,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -73,6 +76,7 @@ module.exports = function( grunt ) {
 				dest: 'build/'
 			}
 		},
+
 		compass: {
 			options: {
 				httpFontsPath: '../fonts',
@@ -94,6 +98,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		watch: {
 			options: {
 				livereload: true,

@@ -49,6 +49,17 @@ module.exports = function( grunt ) {
 				]
 			}
 		},
+
+		jscs: {
+			options: {
+				config: '.jscsrc',
+				excludeFiles: '<%= jshint.options.ignores %>'
+			},
+			all: {
+				src: '<%= jshint.all.src %>'
+			}
+		},
+
 		copy: {
 			css: {
 				expand: true,
@@ -129,8 +140,10 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-jscs');
 
 	// Default grunt
-	grunt.registerTask( 'scripts', [ 'jshint', 'requirejs:dev'] );
-	grunt.registerTask( 'default', [ 'jshint', 'requirejs:dist', 'bower', 'compass:dist', 'copy'] );
+	grunt.registerTask( 'lint', [ 'jshint', 'jscs' ] );
+	grunt.registerTask( 'scripts', [ 'lint', 'requirejs:dev' ] );
+	grunt.registerTask( 'default', [ 'lint', 'bower', 'requirejs:dist', 'copy', 'compass:dist' ] );
 };

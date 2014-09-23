@@ -94,11 +94,11 @@ module.exports = function( grunt ) {
 				src: 'icons/*',
 				dest: 'build/css/'
 			},
-			html: {
+			data: {
 				expand: true,
-				cwd: 'src/',
-				src: '*.html',
-				dest: 'build/'
+				cwd: 'src',
+				src: [ '*.html', 'data/*.json' ],
+				dest: 'build'
 			}
 		},
 

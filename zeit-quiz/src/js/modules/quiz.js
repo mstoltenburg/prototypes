@@ -1,162 +1,16 @@
-define( [ 'jquery' ], function( $ ) {
+define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
     'use strict';
 
     window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                                    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
-    var questions = [
-        {
-            description: 'Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag. ' +
-                         'Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.',
-            question: 'Welche Rolle spielte der junge Sepp in seinem Team?',
-            answers: [
-                { text: 'Er war der beste Stürmer und wurde immer Torschützenkönig.', correct: false },
-                { text: 'Er stand natürlich im Tor und galt als „Elfmeter-Killer“.', correct: true },
-                { text: 'Meist saß er auf der Bank und diskutierte mit dem Trainer.', correct: false }
-            ]
-        },
-        {
-            question: 'Was gibt es seit der Rückrunde 2002/2003 in der Fußballbundesliga?',
-            answers: [
-                { text: '12 Spieler pro Mannschaft', correct: false },
-                { text: 'Vierter Schiedsrichter', correct: true },
-                { text: '3 Tore auf dem Platz', correct: false },
-                { text: 'Zwölfmeter', correct: false }
-            ]
-        },
-        {
-            question: 'Wann wurde die 2. Bundesliga eingeführt?',
-            answers: [
-                { text: '1968', correct: false },
-                { text: '1971', correct: false },
-                { text: '1974', correct: true },
-                { text: '1975', correct: false }
-            ]
-        },
-        {
-            question: 'Das wievielte Mal gewann Deutschland 2014 die Fußball-Weltmeisterschaft?',
-            answers: [
-                { text: 'Zum sechsten Mal', correct: false },
-                { text: 'Zum fünften Mal', correct: false },
-                { text: 'Zum vierten Mal', correct: true },
-                { text: 'Zum dritten Mal', correct: false }
-            ]
-        },
-        {
-            question: 'Welche National-Elf erhielt während der WM 2014 mit 14 gelben Karten die meisten Verwarnungen?',
-            answers: [
-                { text: 'Brasilien', correct: true },
-                { text: 'Ecuador', correct: false },
-                { text: 'Costa Rica', correct: false },
-                { text: 'Algerien', correct: false }
-            ]
-        },
-        {
-            question: 'Welche WM-Mannschaft musste vor dem Halbfinale 2014 ihr Hotel in Brasilien räumen?',
-            answers: [
-                { text: 'Argentinien', correct: false },
-                { text: 'Brasilien', correct: false },
-                { text: 'Deutschland', correct: false },
-                { text: 'Niederlande', correct: true }
-            ]
-        },
-        {
-            question: 'Welcher spanische Fußballstar ist mit der Hüftschwungexpertin Shakira liiert?',
-            answers: [
-                { text: 'David Villa', correct: false },
-                { text: 'Sergio Ramos', correct: false },
-                { text: 'Gerard Pique', correct: true },
-                { text: 'Fernando Torres', correct: false }
-            ]
-        },
-        {
-            question: 'In welcher deutschen TV-Show war Lena Gercke, die Freundin von Kicker Sami Khedira Jurorin?',
-            answers: [
-                { text: '"X Factor"', correct: false },
-                { text: '"The Voice of Germany"', correct: false },
-                { text: '"Popstars"', correct: false },
-                { text: '"Das Supertalent"', correct: true }
-            ]
-        }
-    ],
-
-    entityMap = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;'
-    },
-
-    escapeHtml = function( string ) {
-        // var entityRegExp = new RegExp('[' + Object.keys(entityMap).join('') + ']', 'g');
-
-        return String( string ).replace(/[&<>"]/g, function( m ) {
-            return entityMap[m];
-        });
-    },
-
-    /**
-     * Use Fisher–Yates Shuffle to randomize the order of answers
-     */
-    shuffleArray = function( a ) {
-        var m = a.length, t, i;
-
-        // While there remain elements to shuffle…
-        while ( m ) {
-
-            // Pick a remaining element…
-            i = Math.floor( Math.random() * m-- );
-
-            // And swap it with the current element.
-            t = a[m];
-            a[m] = a[i];
-            a[i] = t;
-        }
-
-        return a;
-    },
-
-    animEndEventNames = {
-        'MozAnimation': 'animationend', // verify for FF < 16
-        'WebkitAnimation': 'webkitAnimationEnd',
-        'OAnimation': 'oAnimationEnd',
-        'msAnimation': 'MSAnimationEnd',
-        'animation': 'animationend'
-    },
-
-    getTransitionPrefix = function() {
-        var b = document.body || document.documentElement,
-            s = b.style,
-            p = 'animation',
-            v = [ 'Moz', 'Webkit', 'O', 'ms' ].reverse(),
-            i;
-
-        if ( typeof s[p] === 'string' ) {
-            return p;
-        }
-
-        // Tests for vendor specific prop
-        p = p.charAt( 0 ).toUpperCase() + p.substr( 1 );
-
-        for ( i = v.length; i--; ) {
-            if ( typeof s[v[i] + p] === 'string' ) {
-                return v[i] + p;
-            }
-        }
-
-        return false;
-    },
-
-    // animation end event name
-    animEndEventName = animEndEventNames[getTransitionPrefix()],
-
-    Quiz = {
+    var Quiz = {
         currentPage: 0,
         currentQuestion: 0,
         pages: null,
         cards: null,
-        questions: questions,
-        total: questions.length,
+        questions: [],
+        total: 0,
         isAnimating: false,
         endThisPage: false,
         endNextPage: false,
@@ -218,8 +72,8 @@ define( [ 'jquery' ], function( $ ) {
                 this.setAnimation( 69 ); // 67 60 34 64 17
             }
 
-            $thisPage.addClass( this.outClass ).on( animEndEventName, function() {
-                $thisPage.off( animEndEventName );
+            $thisPage.addClass( this.outClass ).on( utils.animEndEventName, function() {
+                $thisPage.off( utils.animEndEventName );
                 that.endthisPage = true;
                 if ( isCard ) {
                     that.initHeader();
@@ -229,8 +83,8 @@ define( [ 'jquery' ], function( $ ) {
                 }
             });
 
-            $nextPage.addClass( this.inClass ).on( animEndEventName, function() {
-                $nextPage.off( animEndEventName );
+            $nextPage.addClass( this.inClass ).on( utils.animEndEventName, function() {
+                $nextPage.off( utils.animEndEventName );
                 that.endNextPage = true;
                 if ( that.endthisPage ) {
                     that.onEndAnimation( $thisPage, $nextPage );
@@ -363,9 +217,9 @@ define( [ 'jquery' ], function( $ ) {
                 $card = this.cards.last();
             }
 
-            $card.addClass( 'card--active' ).on( animEndEventName, function( e ) {
+            $card.addClass( 'card--active' ).on( utils.animEndEventName, function( e ) {
                 if ( e.target.className === 'question') {
-                    $card.off( animEndEventName );
+                    $card.off( utils.animEndEventName );
                     that.startTimer();
                 }
             });
@@ -814,7 +668,7 @@ define( [ 'jquery' ], function( $ ) {
                 q.intro = (this.total === i + 1) ? 'Letzte Frage!' : 'Frage ' + (i + 1);
                 answers = [];
 
-                shuffleArray(q.answers);
+                utils.shuffleArray(q.answers);
 
                 for ( a = q.answers.length; a--; ) {
                     answers.push( this.format( answerTemplate, q.answers[a] ) );
@@ -830,13 +684,29 @@ define( [ 'jquery' ], function( $ ) {
 
         format: function( string, map ) {
             return String( string ).replace( /\{(\w+)\}/g, function( match, key ) {
-                return ( key in map ) ? escapeHtml( map[key] ) : '';
+                return ( key in map ) ? utils.escapeHtml( map[key] ) : '';
+            });
+        },
+
+        getQuestions: function() {
+            var that = this;
+
+            $.ajax({
+                dataType: 'json',
+                url: 'data/questions.json',
+                async: false,
+                success: function( data ) {
+                    that.questions = data;
+                    that.total = that.questions.length;
+                }
             });
         },
 
         init: function() {
             var that = this,
                 node = $( 'main' );
+
+            this.getQuestions();
 
             this.initHeader();
             this.initProgress();

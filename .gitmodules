@@ -1,0 +1,3 @@
+[submodule "zeit-quiz/src/fonts/fira"]
+	path = zeit-quiz/src/fonts/fira
+	url = git@github.com:mozilla/Fira.git

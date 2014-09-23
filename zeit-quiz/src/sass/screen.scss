@@ -4,6 +4,7 @@
 @import "mixins";
 
 @import "normalize.css";
+@import "fira.css";
 
 @import "modules/animations";
 @import "modules/fonts";
@@ -23,7 +24,7 @@ html {
 }
 
 body {
-	font-family: "Tablet Gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Fira Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #333;
 	background-color: #fff;
 	margin: 0;

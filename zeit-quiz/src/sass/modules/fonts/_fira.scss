@@ -1,0 +1,31 @@
+// Fira Sans
+@include font-face("Fira Sans", font-files(
+    "fira/woff/FiraSans-Regular.woff",
+    "fira/ttf/FiraSans-Regular.ttf"
+),  "fira/eot/FiraSans-Regular.eot", 400, normal);
+
+@include font-face("Fira Sans", font-files(
+    "fira/woff/FiraSans-Italic.woff",
+    "fira/ttf/FiraSans-Italic.ttf"
+),  "fira/eot/FiraSans-Italic.eot", 400, italic);
+
+@include font-face("Fira Sans", font-files(
+    "fira/woff/FiraSans-Bold.woff",
+    "fira/ttf/FiraSans-Bold.ttf"
+),  "fira/eot/FiraSans-Bold.eot", 700, normal);
+
+@include font-face("Fira Sans", font-files(
+    "fira/woff/FiraSans-BoldItalic.woff",
+    "fira/ttf/FiraSans-BoldItalic.ttf"
+),  "fira/eot/FiraSans-BoldItalic.eot", 700, italic);
+
+// Fira Mono
+@include font-face("Fira Mono", font-files(
+    "fira/woff/FiraMono-Regular.woff",
+    "fira/ttf/FiraMono-Regular.ttf"
+),  "fira/eot/FiraMono-Regular.eot", 400, normal);
+
+@include font-face("Fira Mono", font-files(
+    "fira/woff/FiraMono-Bold.woff",
+    "fira/ttf/FiraMono-Bold.ttf"
+),  "fira/eot/FiraMono-Bold.eot", 600, normal);

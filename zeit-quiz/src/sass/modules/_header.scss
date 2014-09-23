@@ -16,6 +16,8 @@ $dashboard-height: em(27px);
 }
 
 .dashboard {
+	font-family: "Franziska", serif;
+	font-weight: 500;
 	line-height: $dashboard-height;
 
 	li {
@@ -42,6 +44,9 @@ $dashboard-height: em(27px);
 .dashboard__link {
 	width: 25%;
 	text-align: right;
+	&:after {
+		content: " Pkt";
+	}
 }
 
 .dashboard__love {

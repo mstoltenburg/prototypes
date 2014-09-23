@@ -65,14 +65,28 @@ module.exports = function( grunt ) {
 				expand: true,
 				flatten: true,
 				filter: 'isFile',
-				src: 'bower_components/**/*.css',
-				dest: 'build/css/'
+				src: [ 'bower_components/**/*.css', 'src/fonts/fira/fira.css' ],
+				dest: 'build/css/',
+				options: {
+					process: function (content, srcpath) {
+						if ( /fira.css$/.test( srcpath ) ) {
+							return content.replace(/url\('/g, "url('../fonts/fira/");
+						} else {
+							return content;
+						}
+					}
+				}
 			},
 			fonts: {
 				expand: true,
-				cwd: 'src/',
-				src: 'fonts/**',
-				dest: 'build/'
+				cwd: 'src/fonts',
+				src: [
+					'**',
+					'!fira/*',
+					'!fira/source/**',
+					'!**/technical reports/**'
+				],
+				dest: 'build/fonts'
 			},
 			images: {
 				expand: true,
@@ -90,22 +104,22 @@ module.exports = function( grunt ) {
 
 		compass: {
 			options: {
+				fontsDir: 'src/fonts',
 				httpFontsPath: '../fonts',
 				sassDir: 'src/sass',
 				cssDir: 'build/css'
 			},
 			dev: {
 				options: {
-					debugInfo: true,
+					sourcemap: true,
 					environment: 'development',
 					outputStyle: 'expanded'
 				}
 			},
 			dist: {
 				options: {
-					debugInfo: false,
 					environment: 'production',
-					outputStyle: 'compact' // nested (default), compact, compressed, or expanded.
+					outputStyle: 'compressed'
 				}
 			}
 		},
@@ -127,19 +141,26 @@ module.exports = function( grunt ) {
 				tasks: 'compass:dev'
 			},
 			config: {
-				files: [ 'Gruntfile.js' ],
-				tasks: 'default'
+				files: [
+					'.jscsrc',
+					'.jshintrc',
+					'bower.json',
+					'Gruntfile.js'
+				],
+				options: {
+					reload: true
+				}
 			}
 		}
 	});
 
 	// Load required plugins
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-bower-requirejs');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-jscs');
 
 	// Default grunt

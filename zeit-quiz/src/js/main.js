@@ -1,18 +1,16 @@
-/* globals require */
-
 // configuration section for require js
 require.config({
-	shim: {
+    shim: {
 
-	},
-	paths: {
-		jquery: '../../bower_components/jquery/dist/jquery'
-	},
-	packages: [
+    },
+    paths: {
+        jquery: '../../bower_components/jquery/dist/jquery'
+    },
+    packages: [
 
-	]
+    ]
 });
 
-require(['modules/quiz'], function(quiz) {
-	quiz.init();
+require([ 'modules/quiz' ], function( quiz ) {
+    quiz.init();
 });

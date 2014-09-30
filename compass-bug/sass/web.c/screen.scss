@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+@import "compass";
+
+@import "constants";
+
+.default {
+  font-size: $default-font-size;
+  line-height: $default-line-height;
+}
+
+.basic {
+  font-size: $basic-font-size;
+  line-height: $basic-line-height;
+}
+
+.base {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+@import "compass";
+
+@import "constants";
+
+body {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}

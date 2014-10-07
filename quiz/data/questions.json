@@ -1,0 +1,74 @@
+[
+    {
+        "description": "Am Freitag feiert die deutsche Torwart-Legende Sepp Maier seinen 70. Geburtstag. Angefangen hat er seine Fußballer-Karriere beim TSV Haar, am Stadtrand von München.",
+        "question": "Welche Rolle spielte der junge Sepp in seinem Team?",
+        "answers": [
+            { "text": "Er war der beste Stürmer und wurde immer Torschützenkönig.", "correct": false },
+            { "text": "Er stand natürlich im Tor und galt als „Elfmeter-Killer“.", "correct": true },
+            { "text": "Meist saß er auf der Bank und diskutierte mit dem Trainer.", "correct": false }
+        ]
+    },
+    {
+        "question": "Was gibt es seit der Rückrunde 2002/2003 in der Fußballbundesliga?",
+        "answers": [
+            { "text": "12 Spieler pro Mannschaft", "correct": false },
+            { "text": "Vierter Schiedsrichter", "correct": true },
+            { "text": "3 Tore auf dem Platz", "correct": false },
+            { "text": "Zwölfmeter", "correct": false }
+        ]
+    },
+    {
+        "question": "Wann wurde die 2. Bundesliga eingeführt?",
+        "answers": [
+            { "text": "1968", "correct": false },
+            { "text": "1971", "correct": false },
+            { "text": "1974", "correct": true },
+            { "text": "1975", "correct": false }
+        ]
+    },
+    {
+        "question": "Das wievielte Mal gewann Deutschland 2014 die Fußball-Weltmeisterschaft?",
+        "answers": [
+            { "text": "Zum sechsten Mal", "correct": false },
+            { "text": "Zum fünften Mal", "correct": false },
+            { "text": "Zum vierten Mal", "correct": true },
+            { "text": "Zum dritten Mal", "correct": false }
+        ]
+    },
+    {
+        "question": "Welche National-Elf erhielt während der WM 2014 mit 14 gelben Karten die meisten Verwarnungen?",
+        "answers": [
+            { "text": "Brasilien", "correct": true },
+            { "text": "Ecuador", "correct": false },
+            { "text": "Costa Rica", "correct": false },
+            { "text": "Algerien", "correct": false }
+        ]
+    },
+    {
+        "question": "Welche WM-Mannschaft musste vor dem Halbfinale 2014 ihr Hotel in Brasilien räumen?",
+        "answers": [
+            { "text": "Argentinien", "correct": false },
+            { "text": "Brasilien", "correct": false },
+            { "text": "Deutschland", "correct": false },
+            { "text": "Niederlande", "correct": true }
+        ]
+    },
+    {
+        "question": "Welcher spanische Fußballstar ist mit der Hüftschwungexpertin Shakira liiert?",
+        "answers": [
+            { "text": "David Villa", "correct": false },
+            { "text": "Sergio Ramos", "correct": false },
+            { "text": "Gerard Pique", "correct": true },
+            { "text": "Fernando Torres", "correct": false }
+        ]
+    },
+    {
+        "question": "In welcher deutschen TV-Show war Lena Gercke, die Freundin von Kicker Sami Khedira Jurorin?",
+        "answers": [
+            { "text": "X Factor", "correct": false },
+            { "text": "The Voice of Germany", "correct": false },
+            { "text": "Popstars", "correct": false },
+            { "text": "Das Supertalent", "correct": true }
+        ]
+    }
+]

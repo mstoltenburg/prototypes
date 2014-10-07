@@ -1,0 +1,36 @@
+{
+    "abysmal": [
+        {
+            "title": "Niete!",
+            "badge": "Badge-Albert-Red.png",
+            "text": "Glückwunsch zu einer wirklich unterirdischen Performance."
+        },
+        {
+            "title": "WTF?",
+            "badge": "Badge-Marie-Red.png",
+            "text": "Das ist hier kein Kinderspiel!"
+        }
+    ],
+    "brilliant": [
+        {
+            "title": "Absolut Brilliant!",
+            "badge": "Badge-Albert-Red.png",
+            "text": "Dreihundert korrekte Antworten in Höchstgeschwindigkeit"
+        },
+        {
+            "title": "Brilliant",
+            "badge": "Badge-Marie-Red.png",
+            "text": "Dreihundert korrekte Antworten in Höchstgeschwindigkeit"
+        },
+        {
+            "title": "Absolut gut!",
+            "badge": "Badge-Albert-Blue.png",
+            "text": "Dreihundert korrekte Antworten in mittlerem Tempo"
+        },
+        {
+            "title": "Strahlkraft",
+            "badge": "Badge-Marie-White.png",
+            "text": "Einhundert Richtige,\n ein Jubiläum!"
+        }
+    ]
+}

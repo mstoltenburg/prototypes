@@ -21,6 +21,9 @@
 				</header>
 				<div class="cover__claim">
 					Wie gut kennen Sie das Urviech im Bayern-Tor?
+							<svg class="svg_replay">
+								<use xlink:href="css/svg/icons.svg#svg-albert_blue" />
+							</svg>
 				</div>
 				<button class="button js-start-quiz">
 					Spielen
@@ -85,6 +88,28 @@
 
 	<script type="text/template" id="js-report-template">
 		<div class="card">
+			<div id="js-feedback" class="feedback">
+				<h2 class="js-feedback-title feedback__title"></h2>
+				<img class="js-feedback-badge feedback__badge" src="" alt="">
+				<p class="js-feedback-text feedback__text"></p>
+				<ul class="actions">
+					<li class="action">
+						<a href="./" class="icon_replay" title="Quiz wiederholen">
+							<svg class="svg_replay">
+								<use xlink:href="css/svg/icons.svg#svg-albert_blue" />
+							</svg>
+						</a>
+					</li>
+					<li class="action">
+						<a href="./" class="icon_next" title="Nächstes Quiz">
+						</a>
+					</li>
+					<li class="action">
+						<a href="#" class="icon_share" title="Ergebnis teilen">
+						</a>
+					</li>
+				</ul>
+			</div>
 			<ul id="js-stripes" class="stripes">
 				<li class="stripe">
 					<div class="color-strip" data-state="default"></div>

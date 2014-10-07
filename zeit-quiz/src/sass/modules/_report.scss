@@ -1,3 +1,66 @@
+.feedback {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	max-width: $card-width;
+	z-index: 1;
+}
+
+.feedback__badge {
+	display: block;
+	width: em(200px);
+	margin: 0 auto;
+
+	&.upsidedown {
+		@include transform( rotate(180deg) );
+	}
+}
+
+.feedback__title {
+	margin: 1.5em 0 .75em;
+	font-size: em(28px);
+	font-family: "Franziska", serif;
+	font-weight: 500;
+	text-align: center;
+}
+.feedback__text {
+	margin: 1em 0 1.5em;
+	font-size: em(16px);
+	font-family: "Franziska", serif;
+	font-weight: 500;
+	text-align: center;
+}
+
+.icon_replay,
+.icon_next,
+.icon_share {
+	display: inline-block;
+	width: em(30px);
+	height: em(30px);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: contain;
+
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+}
+.icon_replay {
+	background-image: url("icons/x2/replay.png");
+}
+.icon_next {
+	background-image: url("icons/x2/next.png");
+}
+.icon_share {
+	background-image: url("icons/x2/share.png");
+}
+
+.actions,
 .stripes,
 .points {
 	width: 100%;
@@ -22,6 +85,19 @@
 }
 
 .points {
+}
+
+.action {
+	@include flex(1);
+
+	text-align: center;
+
+	&:first-child {
+		text-align: left;
+	}
+	&:last-child {
+		text-align: right;
+	}
 }
 
 .stripe,
@@ -87,7 +163,7 @@ $stripes-transition-delay: .1s;
 		bottom: 0%;
 	}
 	100% {
-		height: 5%;
+		height: 1%;
 		bottom: 0%;
 	}
 }
@@ -100,7 +176,7 @@ $stripes-transition-delay: .1s;
 		bottom: 0%;
 	}
 	100% {
-		height: 5%;
+		height: 1%;
 		bottom: 0%;
 	}
 }

@@ -17,7 +17,7 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
         outClass: 'pt-page-swap',
         inClass: 'pt-page-swap',
         number: $( '#js-number' ),
-        delay: 600,
+        delay: 600, // choose 0 to disable animations
         timer:  {
             time: 0,
             start: null,
@@ -257,6 +257,27 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
 
             stripes.html( s.join('') );
             points.html( p.join('') );
+
+            this.showFeedback();
+        },
+
+        // feedback
+        showFeedback: function() {
+            var node = $( '#js-feedback' ),
+                title = node.find( '.js-feedback-title' ),
+                badge = node.find( '.js-feedback-badge' ),
+                text = node.find( '.js-feedback-text' ),
+                feedback = this.getFeedback(),
+                index = Math.floor(Math.random() * feedback.length),
+                info = feedback[index];
+
+            title.text( info.title );
+            text.text( info.text );
+            badge.get(0).src = 'css/icons/x2/' + info.badge;
+
+            if ( 'abysmal' === this.getFeedbackType() ) {
+                badge.addClass( 'upsidedown' );
+            }
         },
 
         setProgressSpeed: function( seconds ) {
@@ -637,8 +658,8 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
                 this.initTimer();
                 this.number.html( (this.currentQuestion + 1) + '/' + this.total );
             } else {
-                this.timer.display.html( '<a href="#" class="dashboard__love"></a>' );
-                this.score.display.html( '<a href="#" class="dashboard__share"></a>' );
+                // this.timer.display.html( '<a href="#" class="dashboard__love"></a>' );
+                // this.score.display.html( '<a href="#" class="dashboard__share"></a>' );
             }
         },
 
@@ -700,6 +721,30 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
                     that.total = that.questions.length;
                 }
             });
+        },
+
+        getFeedbackType: function() {
+            if ( this.score.points > 50 ) {
+                return 'brilliant';
+            }
+
+            return 'abysmal';
+        },
+
+        getFeedback: function() {
+            var feedback,
+                type = this.getFeedbackType();
+
+            $.ajax({
+                dataType: 'json',
+                url: 'data/feedback.json',
+                async: false,
+                success: function( data ) {
+                    feedback = data;
+                }
+            });
+
+            return feedback[type];
         },
 
         init: function() {

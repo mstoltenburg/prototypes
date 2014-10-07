@@ -13,6 +13,41 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		clean:{
+			// cleanup minified SVGs, remove orphaned files
+			svg: [ '<%= svgmin.svg.dest %>' ]
+		},
+
+		svgmin: {
+			svg: {
+				expand: true,
+				cwd: 'src/sass/svg',
+				src: [ '*.svg' ],
+				dest: 'src/sass/svg/_minified'
+			}
+		},
+
+		svgstore: {
+			options: {
+				prefix : 'svg-', // This will prefix each ID
+				// will add and overide the the default xmlns="http://www.w3.org/2000/svg" attribute to the resulting SVG
+				// symbol: {
+				//     viewBox : '0 0 100 100',
+				//     xmlns: 'http://www.w3.org/2000/svg'
+				// },
+				cleanup: [  ],
+				includedemo: true,
+				formatting: {
+					indent_size: 1,
+					indent_char: '	'
+				}
+			},
+			svg: {
+				src: '<%= svgmin.svg.dest %>/*.svg',
+				dest: 'build/css/svg/icons.svg'
+			}
+		},
+
 		requirejs: {
 			options: {
 				keepBuildDir: true,
@@ -91,7 +126,7 @@ module.exports = function( grunt ) {
 			images: {
 				expand: true,
 				cwd: 'src/sass/',
-				src: 'icons/*',
+				src: 'icons/**/*',
 				dest: 'build/css/'
 			},
 			data: {
@@ -128,9 +163,9 @@ module.exports = function( grunt ) {
 			options: {
 				livereload: true,
 			},
-			html: {
-				files: [ 'src/*.html' ],
-				tasks: 'copy:html'
+			data: {
+				files: [ 'src/*.html', 'src/data/*.json' ],
+				tasks: 'copy:data'
 			},
 			scripts: {
 				files: [ '<%= jshint.all.src %>' ],
@@ -139,6 +174,14 @@ module.exports = function( grunt ) {
 			styles: {
 				files: [ 'src/sass/**/*.scss' ],
 				tasks: 'compass:dev'
+			},
+			images: {
+				files: [ 'src/sass/icons/**/*' ],
+				tasks: 'copy:images'
+			},
+			svg: {
+				files: [ '<%= svgmin.svg.cwd %>/*.svg' ],
+				tasks: [ 'svg' ]
 			},
 			config: {
 				files: [
@@ -162,8 +205,12 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-jscs');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-svgmin');
+	grunt.loadNpmTasks('grunt-svgstore');
 
-	// Default grunt
+	// Register tasks
+	grunt.registerTask( 'svg', [ 'clean', 'svgmin', 'svgstore' ] );
 	grunt.registerTask( 'lint', [ 'jshint', 'jscs' ] );
 	grunt.registerTask( 'scripts', [ 'lint', 'requirejs:dev' ] );
 	grunt.registerTask( 'default', [ 'lint', 'bower', 'requirejs:dist', 'copy', 'compass:dist' ] );

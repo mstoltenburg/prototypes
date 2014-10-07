@@ -8,7 +8,13 @@
 	width: 100%;
 	max-width: $card-width;
 	z-index: 1;
+	opacity: 0;
 }
+
+.feedback--appear {
+	@include animation(fadeIn 1s ease-in-out 1s both);
+}
+
 
 .feedback__badge {
 	display: block;
@@ -21,43 +27,32 @@
 }
 
 .feedback__title {
-	margin: 1.5em 0 .75em;
-	font-size: em(28px);
+	@include font-size-range(20px, 28px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
 	text-align: center;
+	margin: 1em 0 .75em;
 }
 .feedback__text {
-	margin: 1em 0 1.5em;
-	font-size: em(16px);
+	@include font-size-range(16px, 24px);
 	font-family: "Franziska", serif;
 	font-weight: 500;
 	text-align: center;
+	margin: 1em 0 1.5em;
 }
 
-.icon_replay,
-.icon_next,
-.icon_share {
+.feedback__icon {
 	display: inline-block;
-	width: em(30px);
-	height: em(30px);
-	background-repeat: no-repeat;
-	background-position: 0 0;
-	background-size: contain;
+	width: em(28px);
+	height: em(28px);
 
 	svg {
 		width: 100%;
 		height: 100%;
+		fill: #fff;
+		stroke: #000;
+		stroke-width: 3px;
 	}
-}
-.icon_replay {
-	background-image: url("icons/x2/replay.png");
-}
-.icon_next {
-	background-image: url("icons/x2/next.png");
-}
-.icon_share {
-	background-image: url("icons/x2/share.png");
 }
 
 .actions,
@@ -74,7 +69,9 @@
 
 .stripes {
 	overflow: hidden;
-	height: 94%;
+	height: 100%;
+	// use this to display .points again
+	// height: 94%;
 
 	[data-state="default"] { background-color: $color-state-default; }
 	[data-state="quick"]   { background-color: $color-state-quick; }
@@ -85,6 +82,9 @@
 }
 
 .points {
+	// hidden in current design
+	// change .stripes height if .points are displayed again
+	display: none;
 }
 
 .action {

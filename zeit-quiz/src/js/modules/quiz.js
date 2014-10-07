@@ -44,6 +44,14 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
             isActive: false
         },
 
+        reset: function() {
+            this.currentPage = 0;
+            this.currentQuestion = 0;
+            this.score.points = 0;
+            this.progress.items = $();
+            this.score.display.html( this.score.points );
+        },
+
         start: function( e ) {
             this.nextPage( e );
         },
@@ -271,6 +279,7 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
                 index = Math.floor(Math.random() * feedback.length),
                 info = feedback[index];
 
+            node.addClass( 'feedback--appear' );
             title.text( info.title );
             text.text( info.text );
             badge.get(0).src = 'css/icons/x2/' + info.badge;
@@ -667,6 +676,9 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
             var item = this.progress.display.children().eq(0),
                 i;
 
+            // only needed for replay
+            item.attr( 'data-state', 'default' );
+
             for ( i = this.total; i--; ) {
                 this.progress.items = this.progress.items.add( item.clone() );
             }
@@ -766,14 +778,18 @@ define( [ 'jquery', 'modules/utils.js' ], function( $, utils ) {
             node.on( 'click touchstart', '.js-start-quiz', function( e ) { that.start( e ); } );
             node.on( 'click touchstart', '.js-skip', function( e ) { that.nextPage( e, true ); } );
             node.on( 'click touchstart', '.js-answer', function( e ) { that.selectAnswer( e ); } );
+            node.on( 'click touchstart', '.js-replay-quiz', function( e ) {
+                that.reset();
 
-            // on document ready
-            // $( function( e ) {
-            //  // Hide the address bar
-            //  setTimeout( function() {
-            //      window.scrollTo( 0, 1 );
-            //  }, 0);
-            // });
+                that.initHeader();
+                that.initProgress();
+                that.initCards();
+
+                that.cards = node.find( '.card' );
+                that.cards.first().addClass( 'page--current' );
+
+                that.start( e );
+            } );
         }
     };
 

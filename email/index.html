@@ -26,9 +26,10 @@
 	.bodyCell { padding: 1em; }
 
 	img {
-		height: auto !important;
-		max-width: 600px !important;
 		width: 100%;
+		max-width: 600px !important;
+		height: auto !important;
+		border: 0;
 	}
 	.half {
 		width: 50%;
@@ -39,6 +40,11 @@
 	}
 	.img-right {
 		padding-left: 1%;
+	}
+	.half img {
+		display: inline;
+		height: auto;
+		max-width: 300px;
 	}
 
 	h1 {
@@ -71,15 +77,13 @@
 		body { width: 100% !important; min-width: 100% !important; } /* Prevent iOS Mail from adding padding to the body */
 		img { width: 100% !important; }
 	}
-	@media only screen and (max-width: 340px){
+	@media only screen and (max-width: 320px){
 		img, .half {
 			margin-bottom: 1em;
 		}
-		#wrapper,
-		.row,
 		.half {
-			width: 100%;
-			display: block;
+			width: 100% !important;
+			display: block !important;
 			padding-top: 0;
 		}
 		.img-left {
@@ -97,7 +101,7 @@
 <center>
 	<table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
 		<tr>
-			<td align="center" valign="top" class="bodyCell" style="color: #fff; background-color: #669933">
+			<td align="center" valign="top" class="bodyCell" width="600" style="color: #fff; background-color: #669933">
 				<table border="0" cellpadding="0" cellspacing="0" class="container">
 					<tr>
 						<td align="center" valign="top" style="font-family: 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif; font-size: 48px; color: #fff;">
@@ -109,7 +113,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="center" valign="top" class="bodyCell">
+			<td align="center" valign="top" class="bodyCell" width="600">
 				<table border="0" cellpadding="0" cellspacing="0" class="container">
 					<tr>
 						<td align="left" style="font-family: 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif; font-size: 22px; line-height: 30px !important; color: #336600;">
@@ -129,9 +133,21 @@
 					<tr>
 						<td align="center" valign="top">
 							<table border="0" cellpadding="0" cellspacing="0" id="wrapper">
-								<tr class="row">
-									<td class="half img-left"><img src="IMGP2409.jpg" alt="" style="display: block; border: 0;" /></td>
-									<td class="half img-right"><img src="IMGP2412.jpg" alt="" style="display: block; border: 0;" /></td>
+								<tr>
+									<td align="center" valign="top" class="half img-left">
+										<table border="0" cellpadding="0" cellspacing="0" width="100%">
+											<tr>
+												<td><img src="IMGP2409.jpg" alt="" /></td>
+											</tr>
+										</table>
+									</td>
+									<td align="center" valign="top" class="half img-right">
+										<table border="0" cellpadding="0" cellspacing="0" width="100%">
+											<tr>
+												<td><img src="IMGP2412.jpg" alt="" /></td>
+											</tr>
+										</table>
+									</td>
 								</tr>
 							</table>
 						</td>

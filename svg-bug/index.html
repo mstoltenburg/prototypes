@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG print test</title>
+  <style>
+
+    body {
+      font-family: sans-serif;
+    }
+
+    h2 {
+      font-size: 1em;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+
+    .arrow-left {
+      width: 2em;
+      height: 4em;
+      background-color: silver;
+    }
+
+  </style>
+</head>
+<body>
+  <svg style="display:none">
+    <symbol viewBox="0 0 15 30" id="arrow-left">
+      <title>Left</title>
+      <path stroke="#333" stroke-width="1" fill="none" d="M14 0L1 15l13 15" />
+    </symbol>
+    <symbol viewBox="0 0 15 30" id="arrow-right">
+      <title>Right</title>
+      <path stroke="#333" stroke-width="1" fill="none" d="M1 0l13 15L1 30" />
+    </symbol>
+  </svg>
+
+  <h2>Inline SVG:</h2>
+  <svg class="arrow-left" viewBox="0 0 15 30" role="img" aria-labelledby="title">
+    <title>Left</title>
+    <path stroke="#333" stroke-width="1" fill="none" d="M14 0L1 15l13 15" />
+  </svg>
+
+  <h2>Referencing an internal SVG symbol:</h2>
+  <svg class="arrow-left" role="img" aria-labelledby="title">
+    <use xlink:href="#arrow-left"></use>
+  </svg>
+
+  <h2>Referencing an external SVG sprite:</h2>
+  <svg class="arrow-left" role="img" aria-labelledby="title">
+    <use xlink:href="sprite.svg#arrow-left"></use>
+  </svg>
+
+</body>
+</html>

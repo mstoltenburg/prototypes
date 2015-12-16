@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg">
-  <symbol viewBox="0 0 15 30" id="arrow-left">
-    <title>Left</title>
-    <path stroke="#333" stroke-width="1" fill="none" d="M14 0L1 15l13 15" />
-  </symbol>
-  <symbol viewBox="0 0 15 30" id="arrow-right">
-    <title>Right</title>
-    <path stroke="#333" stroke-width="1" fill="none" d="M1 0l13 15L1 30" />
+  <symbol viewBox="0 0 30 30" id="circle">
+    <circle cx="15" cy="15" r="15"/>
   </symbol>
 </svg>

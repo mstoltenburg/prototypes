@@ -1,6 +1,9 @@
 .sass-cache/
 /artikel/css/*.css
-/zeit/node_modules/
-/zeit/build/
+/best-practice/
+/index.html
+/quiz/
+/zeit-quiz/src/sass/svg/_minified
 /zeit/*.log
-zeit-quiz/src/sass/svg/_minified
+/zeit/build/
+/zeit/node_modules/

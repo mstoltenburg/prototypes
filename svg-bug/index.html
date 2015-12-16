@@ -7,49 +7,71 @@
 
     body {
       font-family: sans-serif;
+      margin: 0 auto;
+      max-width: 40em;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin: 1em 0;
     }
 
     h2 {
       font-size: 1em;
       font-weight: normal;
+      margin: 2em 0 .8em;
       text-transform: uppercase;
     }
 
-    .arrow-left {
+    code {
+      background-color: #eee;
+      border-radius: .5em;
+      border: 1px solid #ccc;
+      display: block;
+      margin: .8em 0 1em;
+      padding: .5em 1em;
+      white-space: pre;
+    }
+
+    svg {
+      height: 2em;
       width: 2em;
-      height: 4em;
-      background-color: silver;
     }
 
   </style>
 </head>
 <body>
   <svg style="display:none">
-    <symbol viewBox="0 0 15 30" id="arrow-left">
-      <title>Left</title>
-      <path stroke="#333" stroke-width="1" fill="none" d="M14 0L1 15l13 15" />
-    </symbol>
-    <symbol viewBox="0 0 15 30" id="arrow-right">
-      <title>Right</title>
-      <path stroke="#333" stroke-width="1" fill="none" d="M1 0l13 15L1 30" />
+    <symbol viewBox="0 0 30 30" id="circle">
+      <circle cx="15" cy="15" r="15"/>
     </symbol>
   </svg>
+
+  <h1>Firefox 42.0 does not print an external SVG sprite</h1>
 
   <h2>Inline SVG:</h2>
-  <svg class="arrow-left" viewBox="0 0 15 30" role="img" aria-labelledby="title">
-    <title>Left</title>
-    <path stroke="#333" stroke-width="1" fill="none" d="M14 0L1 15l13 15" />
+  <svg viewBox="0 0 30 30">
+    <circle cx="15" cy="15" r="15"/>
   </svg>
+  <code>&lt;svg viewBox="0 0 30 30"&gt;
+  &lt;circle cx="15" cy="15" r="15" /&gt;
+&lt;/svg&gt;</code>
 
   <h2>Referencing an internal SVG symbol:</h2>
-  <svg class="arrow-left" role="img" aria-labelledby="title">
-    <use xlink:href="#arrow-left"></use>
+  <svg>
+    <use xlink:href="#circle"></use>
   </svg>
+  <code>&lt;svg&gt;
+  &lt;use xlink:href="#circle"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
 
   <h2>Referencing an external SVG sprite:</h2>
-  <svg class="arrow-left" role="img" aria-labelledby="title">
-    <use xlink:href="sprite.svg#arrow-left"></use>
+  <svg>
+    <use xlink:href="sprite.svg#circle"></use>
   </svg>
+  <code>&lt;svg&gt;
+  &lt;use xlink:href="sprite.svg#circle"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code>
 
 </body>
 </html>

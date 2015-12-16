@@ -14,18 +14,41 @@
 		max-width: 60em;
 	}
 
+	section {
+		clear: both;
+		overflow: hidden;
+	}
+
+	h3 {
+		font-family: monospace;
+	}
+
 	.figure {
 		float: left;
 		margin: 0 1em 1em 0;
 		padding: 0 1em 0 0;
-		background-color: rgba(204, 204, 255, .5);
+		background-color: rgba(102, 102, 255, .5);
 	}
 
 	.text {
 		max-width: 40em;
 		margin: 0 auto;
 		padding: 1em;
-		background-color: rgba(204, 255, 204, .5);
+		background-color: rgba(102, 255, 102, .5);
+	}
+
+	.text2 {
+		width: 40em;
+		margin: 0 auto;
+		padding: 1em;
+		background-color: rgba(102, 255, 102, .5);
+	}
+
+	.text3 {
+		max-width: 40em;
+		margin: 0;
+		padding: 1em;
+		background-color: rgba(102, 255, 102, .5);
 	}
 
 	</style>
@@ -33,19 +56,58 @@
 
 <body>
 	<main>
-		<div class="figure">
-			<ol>
-				<li><a href="#">eins</a></li>
-				<li><a href="#">zwei</a></li>
-				<li><a href="#">drei</a></li>
-				<li><a href="#">vier</a></li>
-			</ol>
-		</div>
-		<div class="text">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eos labore sapiente error sequi.
-			Provident neque, ut ipsam, illum, magnam, beatae quisquam autem labore cumque accusamus nulla obcaecati.
-			A, error!
-		</div>
+		<section>
+			<h3>using max-width</h3>
+			<div class="figure">
+				<ol>
+					<li><a href="#">eins</a></li>
+					<li><a href="#">zwei</a></li>
+					<li><a href="#">drei</a></li>
+					<li><a href="#">vier</a></li>
+				</ol>
+			</div>
+			<div class="text">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eos labore sapiente error sequi.
+				Provident neque, ut ipsam, illum, magnam, beatae quisquam autem labore cumque accusamus nulla obcaecati.
+				A, error!
+			</div>
+		</section>
+
+		<section>
+			<h3>using width</h3>
+			<div class="figure">
+				<ol>
+					<li><a href="#">eins</a></li>
+					<li><a href="#">zwei</a></li>
+					<li><a href="#">drei</a></li>
+					<li><a href="#">vier</a></li>
+				</ol>
+			</div>
+			<div class="text2">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eos labore sapiente error sequi.
+				Provident neque, ut ipsam, illum, magnam, beatae quisquam autem labore cumque accusamus nulla obcaecati.
+				A, error!
+			</div>
+		</section>
+
+		<section>
+			<h3>omit margin: auto</h3>
+			<div class="figure">
+				<ol>
+					<li><a href="#">eins</a></li>
+					<li><a href="#">zwei</a></li>
+					<li><a href="#">drei</a></li>
+					<li><a href="#">vier</a></li>
+				</ol>
+			</div>
+			<div class="text3">
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat eos labore sapiente error sequi.
+					Provident neque, ut ipsam, illum, magnam, beatae quisquam autem labore cumque accusamus nulla obcaecati.
+					A, error!
+				</div>
+			</div>
+		</section>
 	</main>
 </body>
 
